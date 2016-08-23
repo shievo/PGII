@@ -10,7 +10,7 @@ import view.FrmPainel;
 import view.Janela;
 import view.Painel;
 
-public class PGII {
+public class PGII {    
     public static void main(String[] args) {
         /*
         FrmPainel painel = new FrmPainel();
