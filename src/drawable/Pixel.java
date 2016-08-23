@@ -6,6 +6,7 @@ package drawable;
 
 import interfaces.drawable.DrawableInterface;
 import java.awt.Graphics;
+import uteis.Convert;
 import uteis.Coordenada;
 import uteis.ViewPort;
 
@@ -22,8 +23,10 @@ public class Pixel extends DrawableObject implements DrawableInterface {
 
     @Override
     public void draw(Graphics graphics, ViewPort viewPort) {
-        int x = coordenada.getX();
-        int y = coordenada.getY();
+        Coordenada convertCoordenada = Convert.toViewPort(this.coordenada, viewPort);
+        
+        int x = convertCoordenada.getX();
+        int y = convertCoordenada.getY();
         graphics.drawLine(x, y, x, y);
     }
 

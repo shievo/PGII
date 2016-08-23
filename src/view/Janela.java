@@ -1,6 +1,7 @@
 package view;
 
 import drawable.Line;
+import drawable.Pixel;
 import interfaces.drawable.DrawableInterface;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +25,8 @@ public class Janela extends JFrame implements ActionListener {
 
     private final String add = "Add";
     private final String remove = "Remove";
+
+    FrmPainel frm;
 
     public Janela() {
         this.setLayout(null);
@@ -58,16 +61,19 @@ public class Janela extends JFrame implements ActionListener {
         painel.addDrawable(new Line(new Coordenada(0, -170), new Coordenada(0, 170)));
         painel.addDrawable(new Line(new Coordenada(-170, 0), new Coordenada(170, 0)));
         painel.repaint();
-         
+
         lvDrawable.setListData(painel.getLstDrawables().toArray());
+
+        frm = new FrmPainel();
+        frm.setActionAddPixel(new AddPixel());
+        frm.setActionAddLine(new AddLine());
+        frm.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (add.equals(e.getActionCommand())) {
             //adicionar
-            FrmPainel frm = new FrmPainel();
-            frm.setVisible(rootPaneCheckingEnabled);
         }
         if (remove.equals(e.getActionCommand())) {
             //remover
@@ -77,6 +83,31 @@ public class Janela extends JFrame implements ActionListener {
                 painel.repaint();
             }
         }
+    }
 
+    public class AddPixel implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (frm != null) {
+                Pixel pixel = frm.getPixel();
+                painel.addDrawable(pixel);
+                painel.repaint();
+                lvDrawable.setListData(painel.getLstDrawables().toArray());
+            }
+        }
+    }
+
+    public class AddLine implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (frm != null) {
+                Line line = frm.getLine();
+                painel.addDrawable(line);
+                painel.repaint();
+                lvDrawable.setListData(painel.getLstDrawables().toArray());
+            }
+        }
     }
 }
