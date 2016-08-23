@@ -23,6 +23,9 @@ public class Janela extends JFrame implements ActionListener {
     private JList lvDrawable;
     private BoxLayout layout;
 
+    
+    
+    
     private final String add = "Add";
     private final String remove = "Remove";
 
