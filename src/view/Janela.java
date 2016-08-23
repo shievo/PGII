@@ -32,7 +32,7 @@ public class Janela extends JFrame implements ActionListener {
         //criação do componentes
         ViewPort viewPort = new ViewPort(-170, 170, -170, 170, 0, 380, 0, 380);
         painel = new Painel(viewPort);
-        painel.setBounds(410, 110, 380, 380);
+        painel.setBounds(380, 90, 380, 380);
         this.add(painel);
 
         //criação do botao de adição
