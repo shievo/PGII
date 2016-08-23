@@ -24,11 +24,19 @@ public class Painel extends JPanel{
     private ViewPort viewPort;
     
     public Painel() {
+        super();
         lstDrawables = new ArrayList<>();
         this.setBackground(Color.red);
         viewPort = new ViewPort();/*(5, this.getWidth()-5, 5, this.getHeight()-5, 
                 -Math.round(this.getWidth()/2), Math.round(this.getWidth()/2), 
                 -Math.round(this.getHeight()/2), Math.round(this.getHeight()/2));*/
+    }
+    
+    public Painel(ViewPort viewPort) {
+        super();
+        lstDrawables = new ArrayList<>();
+        this.viewPort = viewPort;
+        this.setBackground(Color.red);
     }
 
     public List<DrawableInterface> getLstDrawables() {
