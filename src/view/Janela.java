@@ -61,6 +61,7 @@ public class Janela extends JFrame implements ActionListener {
         //teste
         painel.addDrawable(new Line(new Coordenada(0, -170), new Coordenada(0, 170)));
         painel.addDrawable(new Line(new Coordenada(-170, 0), new Coordenada(170, 0)));
+        
         painel.repaint();
         
         lvDrawable.setListData(painel.getLstDrawables().toArray());
