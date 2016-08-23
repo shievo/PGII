@@ -2,6 +2,7 @@ package view;
 
 import drawable.Line;
 import drawable.Pixel;
+import java.awt.event.ActionListener;
 import javax.swing.JList;
 import uteis.Coordenada;
 
@@ -16,6 +17,33 @@ public class FrmPainel extends javax.swing.JFrame {
 
     public FrmPainel() {
         initComponents();
+    }
+
+    public void setActionAddPixel(ActionListener listner) {
+        addPixel.addActionListener(listner);
+    }
+
+    public void setActionAddLine(ActionListener listner) {
+        addLinha.addActionListener(listner);
+    }
+
+    public Pixel getPixel() {
+        int x = Integer.parseInt(xPixel.getText());
+        int y = Integer.parseInt(yPixel.getText());
+        Coordenada coordenada = new Coordenada(x, y);
+        Pixel pixel = new Pixel(coordenada);
+        return pixel;
+    }
+
+    public Line getLine() {
+        int x1 = Integer.parseInt(xEsqLinha.getText());
+        int y1 = Integer.parseInt(yEsqLinha.getText());
+        int x2 = Integer.parseInt(xDirLinha.getText());
+        int y2 = Integer.parseInt(yDirLinha.getText());
+        Coordenada start = new Coordenada(x1, y1);
+        Coordenada end = new Coordenada(x2, y2);
+        Line line = new Line(start, end);
+        return line;
     }
 
     @SuppressWarnings("unchecked")
@@ -335,14 +363,6 @@ public class FrmPainel extends javax.swing.JFrame {
 
     private void addPixelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPixelActionPerformed
 
-        System.out.println(xPixel.getText());
-        System.out.println(yPixel.getText());
-        
-        painel.addDrawable(new Pixel(new Coordenada(Integer.parseInt(xPixel.getText()), 
-                Integer.parseInt(yPixel.getText()))));
-        painel.repaint();
-
-        lvDrawable.setListData(painel.getLstDrawables().toArray());
     }//GEN-LAST:event_addPixelActionPerformed
 
     private void xPixelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xPixelActionPerformed
@@ -359,22 +379,7 @@ public class FrmPainel extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelPixelActionPerformed
 
     private void addLinhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLinhaActionPerformed
-        
-        System.out.println(Integer.parseInt(xEsqLinha.getText()));
-        System.out.println(Integer.parseInt(yEsqLinha.getText()));
-        System.out.println(Integer.parseInt(xDirLinha.getText()));
-        System.out.println(Integer.parseInt(yDirLinha.getText()));
 
-        painel.addDrawable(new Line(new Coordenada(Integer.parseInt(xEsqLinha.getText()), 
-                Integer.parseInt(yEsqLinha.getText())),new Coordenada(Integer.parseInt(xEsqLinha.getText()), 
-                Integer.parseInt(yEsqLinha.getText()))));
-        painel.addDrawable(new Line(new Coordenada(Integer.parseInt(xDirLinha.getText()),
-                Integer.parseInt(yDirLinha.getText())), new Coordenada(Integer.parseInt(xDirLinha.getText()),
-                Integer.parseInt(yDirLinha.getText()))));
-        painel.repaint();
-        
-        lvDrawable.setListData(painel.getLstDrawables().toArray());
-         
     }//GEN-LAST:event_addLinhaActionPerformed
 
     private void xEsqLinhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xEsqLinhaActionPerformed
@@ -395,8 +400,6 @@ public class FrmPainel extends javax.swing.JFrame {
         xDirLinha.setText("");
         yDirLinha.setText("");
     }//GEN-LAST:event_cancelLinhaActionPerformed
-
-
 
     /**
      * @param args the command line arguments
