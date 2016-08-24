@@ -31,7 +31,7 @@ public class Coordenada {
 
     @Override
     public String toString() {
-        return "Coordenada{" + "x=" + x + ", y=" + y + '}';
+        return "x=" + x + ", y=" + y;
     }
     
     

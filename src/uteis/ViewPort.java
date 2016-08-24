@@ -10,7 +10,8 @@ public class ViewPort {
     //tamanho do view port
     private Integer xVpMin, xVpMax, yVpMin, yVpMax;
     //modificadores de posição e zoom
-    private Integer zoom, xMov, yMov;
+    private float zoom;
+    private Integer xMov, yMov;
     
     public ViewPort() {
         //Inicializador padrao
@@ -25,9 +26,10 @@ public class ViewPort {
         this.xVpMax = xVpMax;
         this.yVpMin = yVpMin;
         this.yVpMax = yVpMax;
+        this.zoom = 1F;
     }
 
-    public ViewPort(Integer xWMin, Integer xWMax, Integer yWMin, Integer yWMax, Integer xVpMin, Integer xVpMax, Integer yVpMin, Integer yVpMax, Integer xMov, Integer yMov, Integer zoom) {
+    public ViewPort(Integer xWMin, Integer xWMax, Integer yWMin, Integer yWMax, Integer xVpMin, Integer xVpMax, Integer yVpMin, Integer yVpMax, Integer xMov, Integer yMov, float zoom) {
         this.xWMin = xWMin;
         this.xWMax = xWMax;
         this.yWMin = yWMin;
@@ -42,7 +44,7 @@ public class ViewPort {
     }
     
     public Integer getxWMin() {
-        return xWMin;
+        return Math.round(xWMin/zoom);
     }
 
     public void setxWMin(Integer xWMin) {
@@ -50,7 +52,7 @@ public class ViewPort {
     }
 
     public Integer getxWMax() {
-        return xWMax;
+        return Math.round(xWMax/zoom);
     }
 
     public void setxWMax(Integer xWMax) {
@@ -58,7 +60,7 @@ public class ViewPort {
     }
 
     public Integer getyWMin() {
-        return yWMin;
+        return Math.round(yWMin/zoom);
     }
 
     public void setyWMin(Integer yWMin) {
@@ -66,7 +68,7 @@ public class ViewPort {
     }
 
     public Integer getyWMax() {
-        return yWMax;
+        return Math.round(yWMax/zoom);
     }
 
     public void setyWMax(Integer yWMax) {
@@ -103,6 +105,30 @@ public class ViewPort {
 
     public void setyVpMax(Integer yVpMax) {
         this.yVpMax = yVpMax;
+    }
+
+    public float getZoom() {
+        return zoom;
+    }
+
+    public void setZoom(float zoom) {
+        this.zoom = zoom;
+    }
+
+    public Integer getxMov() {
+        return xMov;
+    }
+
+    public void setxMov(Integer xMov) {
+        this.xMov = xMov;
+    }
+
+    public Integer getyMov() {
+        return yMov;
+    }
+
+    public void setyMov(Integer yMov) {
+        this.yMov = yMov;
     }
 
     
