@@ -31,6 +31,10 @@ public class FrmPainel extends javax.swing.JFrame {
         addLinha.addActionListener(listner);
     }
 
+    public void setActionAddPoligon(ActionListener listner) {
+        addPoligon.addActionListener(listner);
+    }
+    
     public Pixel getPixel() {
         int x = Integer.parseInt(xPixel.getText());
         int y = Integer.parseInt(yPixel.getText());
@@ -78,7 +82,7 @@ public class FrmPainel extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        addPoligon = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         ListaPoligono = new javax.swing.JList();
         xPoligon = new javax.swing.JTextField();
@@ -282,8 +286,13 @@ public class FrmPainel extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Coordenada Y:");
 
-        jButton6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton6.setText("Inserir Objeto");
+        addPoligon.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        addPoligon.setText("Inserir Objeto");
+        addPoligon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addPoligonActionPerformed(evt);
+            }
+        });
 
         jScrollPane2.setViewportView(ListaPoligono);
 
@@ -336,7 +345,7 @@ public class FrmPainel extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton6)
+                        .addComponent(addPoligon)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,7 +376,7 @@ public class FrmPainel extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton6)
+                .addComponent(addPoligon)
                 .addGap(18, 18, 18))
         );
 
@@ -462,8 +471,15 @@ public class FrmPainel extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_rmvPntPolActionPerformed
 
+    private void addPoligonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPoligonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addPoligonActionPerformed
+
     public Poligon getPoligon() {
-        return new Poligon();
+        Poligon poligon = new Poligon(coordPoligono);
+        coordPoligono = new ArrayList<>();
+        ListaPoligono.setListData(coordPoligono.toArray());
+        return poligon;
     }
 
     public void addPontoPol(Coordenada coordenada) {
@@ -513,10 +529,10 @@ public class FrmPainel extends javax.swing.JFrame {
     private javax.swing.JList ListaPoligono;
     private javax.swing.JButton addLinha;
     private javax.swing.JButton addPixel;
+    private javax.swing.JButton addPoligon;
     private javax.swing.JButton addPonPol;
     private javax.swing.JButton cancelLinha;
     private javax.swing.JButton cancelPixel;
-    private javax.swing.JButton jButton6;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

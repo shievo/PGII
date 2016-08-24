@@ -2,6 +2,7 @@ package view;
 
 import drawable.Line;
 import drawable.Pixel;
+import drawable.Poligon;
 import interfaces.drawable.DrawableInterface;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -75,6 +76,7 @@ public class Janela extends JFrame implements ActionListener {
         frm = new FrmPainel();
         frm.setActionAddPixel(new AddPixel());
         frm.setActionAddLine(new AddLine());
+        frm.setActionAddPoligon(new AddPoligon());
         frm.setVisible(true);
     }
 
@@ -126,6 +128,19 @@ public class Janela extends JFrame implements ActionListener {
             if (frm != null) {
                 Line line = frm.getLine();
                 painel.addDrawable(line);
+                painel.repaint();
+                lvDrawable.setListData(painel.getLstDrawables().toArray());
+            }
+        }
+    }
+    
+    public class AddPoligon implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (frm != null) {
+                Poligon poligon = frm.getPoligon();
+                painel.addDrawable(poligon);
                 painel.repaint();
                 lvDrawable.setListData(painel.getLstDrawables().toArray());
             }
