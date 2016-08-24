@@ -7,7 +7,9 @@ import interfaces.drawable.DrawableInterface;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.jws.Oneway;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -18,23 +20,50 @@ import uteis.ViewPort;
 
 public class Janela extends JFrame implements ActionListener {
 
+    public interface ButtonClick {
+        public void click();
+    }
+    
+    private Map<String, ButtonClick> buttonsClick = new HashMap<String, ButtonClick>();
+    
     private Painel painel;
     private JButton btnZoomIn;
     private JButton btnZoomOut;
     private JButton btnRemove;
+    
+    private JButton btnMoveLeft;
+    private JButton btnMoveRight;
+    private JButton btnMoveUp;
+    private JButton btnMoveDown;
+    
     private JList lvDrawable;
     private BoxLayout layout;
 
     private final String zoomIn = "zoomIn";
     private final String zoomOut = "zoomOut";
     private final String remove = "Remove";
+    
+    private final String moveLeft = "MoveLeft";
+    private final String moveRight = "MoveRight";
+    private final String moveUp = "MoveUp";
+    private final String moveDown = "MoveDown";
 
     FrmPainel frm;
 
     public Janela() {
+        buttonsClick.put(zoomIn, new OnClickZoomIn());
+        buttonsClick.put(zoomOut, new OnClickZoomOut());
+        buttonsClick.put(remove, new OnClickRemove());
+        buttonsClick.put(moveLeft, new OnClickMoveLeft());
+        buttonsClick.put(moveRight, new OnClickMoveRight());
+        buttonsClick.put(moveUp, new OnClickMoveUp());
+        buttonsClick.put(moveDown, new OnClickMoveDown());
+        
         this.setLayout(null);
         this.setSize(800, 600);
-
+        this.setLocation(400, 80);
+        this.setResizable(false);
+        
         //criação do componentes
         ViewPort viewPort = new ViewPort(-170, 170, -170, 170, 0, 380, 0, 380);
         painel = new Painel(viewPort);
@@ -60,6 +89,35 @@ public class Janela extends JFrame implements ActionListener {
         btnRemove.addActionListener(this);
         btnRemove.setBounds(110, 500, 100, 20);
         this.add(btnRemove);
+        
+        
+        
+        //botoes de movimento
+        btnMoveLeft = new JButton(moveLeft);
+        btnMoveLeft.setActionCommand(moveLeft);
+        btnMoveLeft.addActionListener(this);
+        btnMoveLeft.setBounds(330, 510, 100, 20);
+        this.add(btnMoveLeft);
+        
+        btnMoveRight = new JButton(moveRight);
+        btnMoveRight.setActionCommand(moveRight);
+        btnMoveRight.addActionListener(this);
+        btnMoveRight.setBounds(530, 510, 100, 20);
+        this.add(btnMoveRight);
+        
+        btnMoveUp = new JButton(moveUp);
+        btnMoveUp.setActionCommand(moveUp);
+        btnMoveUp.addActionListener(this);
+        btnMoveUp.setBounds(430, 500, 100, 20);
+        this.add(btnMoveUp);
+        
+        btnMoveDown = new JButton(moveDown);
+        btnMoveDown.setActionCommand(moveDown);
+        btnMoveDown.addActionListener(this);
+        btnMoveDown.setBounds(430, 520, 100, 20);
+        this.add(btnMoveDown);
+        
+        
 
         //criação da lista para gerenciamento dos itens criados
         lvDrawable = new JList();
@@ -82,30 +140,8 @@ public class Janela extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (zoomIn.equals(e.getActionCommand())) {
-            ViewPort viewPort = painel.getViewPort();
-            float zoom = viewPort.getZoom();
-            zoom *= 2;
-            viewPort.setZoom(zoom);
-            painel.setViewPort(viewPort);
-            painel.repaint();
-        }
-        if (zoomOut.equals(e.getActionCommand())) {
-            ViewPort viewPort = painel.getViewPort();
-            float zoom = viewPort.getZoom();
-            zoom /= 2;
-            viewPort.setZoom(zoom);
-            painel.setViewPort(viewPort);
-            painel.repaint();
-        }
-        if (remove.equals(e.getActionCommand())) {
-            //remover
-            if ((!painel.getLstDrawables().isEmpty()) && (lvDrawable.getSelectedIndex() >= 0)) {
-                painel.removeDrawable(lvDrawable.getSelectedIndex());
-                lvDrawable.setListData(painel.getLstDrawables().toArray());
-                painel.repaint();
-            }
-        }
+        ButtonClick buttonClick = buttonsClick.get(e.getActionCommand());
+        buttonClick.click();
     }
 
     public class AddPixel implements ActionListener {
@@ -146,4 +182,86 @@ public class Janela extends JFrame implements ActionListener {
             }
         }
     }
+    
+    
+    public class OnClickZoomIn implements ButtonClick {
+        @Override
+        public void click() {
+            ViewPort viewPort = painel.getViewPort();
+            float zoom = viewPort.getZoom();
+            zoom *= 2;
+            viewPort.setZoom(zoom);
+            painel.setViewPort(viewPort);
+            painel.repaint();
+        }
+    }
+    
+    public class OnClickZoomOut implements ButtonClick {
+        @Override
+        public void click() {
+            ViewPort viewPort = painel.getViewPort();
+            float zoom = viewPort.getZoom();
+            zoom /= 2;
+            viewPort.setZoom(zoom);
+            painel.setViewPort(viewPort);
+            painel.repaint();
+        }
+    }
+    
+    public class OnClickRemove implements ButtonClick {
+        @Override
+        public void click() {
+            if ((!painel.getLstDrawables().isEmpty()) && (lvDrawable.getSelectedIndex() >= 0)) {
+                painel.removeDrawable(lvDrawable.getSelectedIndex());
+                lvDrawable.setListData(painel.getLstDrawables().toArray());
+                painel.repaint();
+            }
+        }
+    }
+    public class OnClickMoveLeft implements ButtonClick {
+        @Override
+        public void click() {
+            ViewPort viewPort = painel.getViewPort();
+            int xMov = viewPort.getxMov();
+            xMov -= 10;
+            viewPort.setxMov(xMov);
+            painel.setViewPort(viewPort);
+            painel.repaint();
+        }
+    }
+    public class OnClickMoveRight implements ButtonClick {
+        @Override
+        public void click() {
+            ViewPort viewPort = painel.getViewPort();
+            int xMov = viewPort.getxMov();
+            xMov += 10;
+            viewPort.setxMov(xMov);
+            painel.setViewPort(viewPort);
+            painel.repaint();
+        }
+    }
+    public class OnClickMoveUp implements ButtonClick {
+        @Override
+        public void click() {
+            ViewPort viewPort = painel.getViewPort();
+            int yMov = viewPort.getyMov();
+            yMov += 10;
+            viewPort.setyMov(yMov);
+            painel.setViewPort(viewPort);
+            painel.repaint();
+        }
+    }
+    public class OnClickMoveDown implements ButtonClick {
+        @Override
+        public void click() {
+            ViewPort viewPort = painel.getViewPort();
+            int yMov = viewPort.getyMov();
+            yMov -= 10;
+            viewPort.setyMov(yMov);
+            painel.setViewPort(viewPort);
+            painel.repaint();
+        }
+    }
+    
+    
 }

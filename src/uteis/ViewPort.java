@@ -27,6 +27,8 @@ public class ViewPort {
         this.yVpMin = yVpMin;
         this.yVpMax = yVpMax;
         this.zoom = 1F;
+        this.xMov = 0;
+        this.yMov = 0;
     }
 
     public ViewPort(Integer xWMin, Integer xWMax, Integer yWMin, Integer yWMax, Integer xVpMin, Integer xVpMax, Integer yVpMin, Integer yVpMax, Integer xMov, Integer yMov, float zoom) {
@@ -44,7 +46,7 @@ public class ViewPort {
     }
     
     public Integer getxWMin() {
-        return Math.round(xWMin/zoom);
+        return Math.round(xWMin/zoom) + xMov;
     }
 
     public void setxWMin(Integer xWMin) {
@@ -52,7 +54,7 @@ public class ViewPort {
     }
 
     public Integer getxWMax() {
-        return Math.round(xWMax/zoom);
+        return Math.round(xWMax/zoom) + xMov;
     }
 
     public void setxWMax(Integer xWMax) {
@@ -60,7 +62,7 @@ public class ViewPort {
     }
 
     public Integer getyWMin() {
-        return Math.round(yWMin/zoom);
+        return Math.round(yWMin/zoom) + yMov;
     }
 
     public void setyWMin(Integer yWMin) {
@@ -68,7 +70,7 @@ public class ViewPort {
     }
 
     public Integer getyWMax() {
-        return Math.round(yWMax/zoom);
+        return Math.round(yWMax/zoom) + yMov;
     }
 
     public void setyWMax(Integer yWMax) {

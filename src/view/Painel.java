@@ -27,9 +27,7 @@ public class Painel extends JPanel{
         super();
         lstDrawables = new ArrayList<>();
         this.setBackground(Color.red);
-        viewPort = new ViewPort();/*(5, this.getWidth()-5, 5, this.getHeight()-5, 
-                -Math.round(this.getWidth()/2), Math.round(this.getWidth()/2), 
-                -Math.round(this.getHeight()/2), Math.round(this.getHeight()/2));*/
+        viewPort = new ViewPort();
     }
     
     public Painel(ViewPort viewPort) {
