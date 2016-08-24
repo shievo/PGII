@@ -18,12 +18,14 @@ import uteis.ViewPort;
 public class Janela extends JFrame implements ActionListener {
 
     private Painel painel;
-    private JButton btnAdd;
+    private JButton btnZoomIn;
+    private JButton btnZoomOut;
     private JButton btnRemove;
     private JList lvDrawable;
     private BoxLayout layout;
 
-    private final String add = "Add";
+    private final String zoomIn = "zoomIn";
+    private final String zoomOut = "zoomOut";
     private final String remove = "Remove";
 
     FrmPainel frm;
@@ -39,11 +41,17 @@ public class Janela extends JFrame implements ActionListener {
         this.add(painel);
 
         //criação do botao de adição
-        btnAdd = new JButton(add);
-        btnAdd.setActionCommand(add);
-        btnAdd.addActionListener(this);
-        btnAdd.setBounds(5, 500, 100, 20);
-        this.add(btnAdd);
+        btnZoomIn = new JButton("+");
+        btnZoomIn.setActionCommand(zoomIn);
+        btnZoomIn.addActionListener(this);
+        btnZoomIn.setBounds(330, 110, 50, 50);
+        this.add(btnZoomIn);
+        
+        btnZoomOut = new JButton("-");
+        btnZoomOut.setActionCommand(zoomOut);
+        btnZoomOut.addActionListener(this);
+        btnZoomOut.setBounds(330, 160, 50, 50);
+        this.add(btnZoomOut);
 
         //criação do botao de remoção
         btnRemove = new JButton(remove);
@@ -72,8 +80,21 @@ public class Janela extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (add.equals(e.getActionCommand())) {
-            //adicionar
+        if (zoomIn.equals(e.getActionCommand())) {
+            ViewPort viewPort = painel.getViewPort();
+            float zoom = viewPort.getZoom();
+            zoom *= 2;
+            viewPort.setZoom(zoom);
+            painel.setViewPort(viewPort);
+            painel.repaint();
+        }
+        if (zoomOut.equals(e.getActionCommand())) {
+            ViewPort viewPort = painel.getViewPort();
+            float zoom = viewPort.getZoom();
+            zoom /= 2;
+            viewPort.setZoom(zoom);
+            painel.setViewPort(viewPort);
+            painel.repaint();
         }
         if (remove.equals(e.getActionCommand())) {
             //remover
