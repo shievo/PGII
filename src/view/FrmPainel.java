@@ -2,7 +2,11 @@ package view;
 
 import drawable.Line;
 import drawable.Pixel;
+import drawable.Poligon;
+import interfaces.drawable.DrawableInterface;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JList;
 import uteis.Coordenada;
 
@@ -13,7 +17,7 @@ import uteis.Coordenada;
 public class FrmPainel extends javax.swing.JFrame {
 
     private Painel painel;
-    private JList lvDrawable;
+    private List<Coordenada> coordPoligono;
 
     public FrmPainel() {
         initComponents();
@@ -71,13 +75,16 @@ public class FrmPainel extends javax.swing.JFrame {
         addLinha = new javax.swing.JButton();
         cancelLinha = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        ListaPoligono = new javax.swing.JList();
+        xPoligon = new javax.swing.JTextField();
+        yPoligon = new javax.swing.JTextField();
+        addPonPol = new javax.swing.JButton();
+        rmvPntPol = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -141,7 +148,7 @@ public class FrmPainel extends javax.swing.JFrame {
                     .addComponent(cancelPixel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(yPixel)
                     .addComponent(xPixel))
-                .addContainerGap(397, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,7 +165,7 @@ public class FrmPainel extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cancelPixel)
                     .addComponent(addPixel))
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addContainerGap(349, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Pixel", jPanel1);
@@ -236,7 +243,7 @@ public class FrmPainel extends javax.swing.JFrame {
                             .addComponent(yEsqLinha, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(yDirLinha, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cancelLinha))))
-                .addContainerGap(368, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,30 +268,10 @@ public class FrmPainel extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addLinha)
                     .addComponent(cancelLinha))
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addContainerGap(289, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Linha", jPanel3);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "V0", "V1", "V2", "V3", "V4", "V5", "V6", "V7", "V8", "V9", "V10"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jTable1.setRowHeight(25);
-        jScrollPane1.setViewportView(jTable1);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setText("Vértices");
@@ -296,51 +283,92 @@ public class FrmPainel extends javax.swing.JFrame {
         jLabel9.setText("Coordenada Y:");
 
         jButton6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton6.setText("Adicionar");
+        jButton6.setText("Inserir Objeto");
 
-        jButton7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton7.setText("Cancelar");
+        jScrollPane2.setViewportView(ListaPoligono);
+
+        xPoligon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xPoligonActionPerformed(evt);
+            }
+        });
+
+        yPoligon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yPoligonActionPerformed(evt);
+            }
+        });
+
+        addPonPol.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        addPonPol.setText("Adicionar");
+        addPonPol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addPonPolActionPerformed(evt);
+            }
+        });
+
+        rmvPntPol.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        rmvPntPol.setText("Remover");
+        rmvPntPol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rmvPntPolActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(jButton6)
-                .addGap(79, 79, 79)
-                .addComponent(jButton7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addComponent(jLabel7))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(xPoligon, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(addPonPol)))
+                .addGap(0, 36, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(228, 228, 228))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jButton6)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(yPoligon, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(rmvPntPol)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel9)
-                        .addGap(7, 7, 7))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7))
-                .addContainerGap(146, Short.MAX_VALUE))
+                    .addComponent(jLabel8)
+                    .addComponent(xPoligon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addPonPol))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(yPoligon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rmvPntPol))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton6)
+                .addGap(18, 18, 18))
         );
 
         jTabbedPane1.addTab("Poligono", jPanel4);
@@ -401,6 +429,46 @@ public class FrmPainel extends javax.swing.JFrame {
         yDirLinha.setText("");
     }//GEN-LAST:event_cancelLinhaActionPerformed
 
+    private void yPoligonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yPoligonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_yPoligonActionPerformed
+
+    private void xPoligonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xPoligonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_xPoligonActionPerformed
+
+    private void addPonPolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPonPolActionPerformed
+
+        if (coordPoligono == null) {
+            coordPoligono = new ArrayList<>();
+        }
+        if (addPonPol != null) {
+            int x = Integer.parseInt(xPoligon.getText());
+            int y = Integer.parseInt(yPoligon.getText());
+            Coordenada coordenada = new Coordenada(x, y);
+            coordPoligono.add(coordenada);
+
+            ListaPoligono.setListData(coordPoligono.toArray());
+        }
+
+    }//GEN-LAST:event_addPonPolActionPerformed
+
+    private void rmvPntPolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rmvPntPolActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rmvPntPolActionPerformed
+
+    public Poligon getPoligon() {
+        return new Poligon();
+    }
+
+    public void addPontoPol(Coordenada coordenada) {
+        coordPoligono.add(coordenada);
+    }
+
+    public void removePontoPol(int index) {
+        coordPoligono.remove(index);
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -437,12 +505,13 @@ public class FrmPainel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList ListaPoligono;
     private javax.swing.JButton addLinha;
     private javax.swing.JButton addPixel;
+    private javax.swing.JButton addPonPol;
     private javax.swing.JButton cancelLinha;
     private javax.swing.JButton cancelPixel;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -456,14 +525,16 @@ public class FrmPainel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton rmvPntPol;
     private javax.swing.JTextField xDirLinha;
     public javax.swing.JTextField xEsqLinha;
     private javax.swing.JTextField xPixel;
+    private javax.swing.JTextField xPoligon;
     private javax.swing.JTextField yDirLinha;
     private javax.swing.JTextField yEsqLinha;
     private javax.swing.JTextField yPixel;
+    private javax.swing.JTextField yPoligon;
     // End of variables declaration//GEN-END:variables
 }
