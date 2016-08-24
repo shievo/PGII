@@ -25,6 +25,7 @@ public class Pixel extends DrawableObject implements DrawableInterface {
 
     @Override
     public void draw(Graphics graphics, ViewPort viewPort) {
+        
         Coordenada convertCoordenada = Convert.toViewPort(this.coordenada, viewPort);
         
         int x = convertCoordenada.getX();

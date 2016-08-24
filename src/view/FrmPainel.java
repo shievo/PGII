@@ -6,6 +6,7 @@ import drawable.Poligon;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import uteis.Coordenada;
 
 /**
@@ -31,8 +32,14 @@ public class FrmPainel extends javax.swing.JFrame {
     public void setActionAddPoligon(ActionListener listner) {
         addPoligon.addActionListener(listner);
     }
-    
+
     public Pixel getPixel() {
+
+        if ((xPixel.getText().equals("") || (xPixel == null))
+                || (yPixel.getText().equals("") || (yPixel == null))) {
+            JOptionPane.showMessageDialog(null, "Coordenadas sem valores!");
+        }
+
         int x = Integer.parseInt(xPixel.getText());
         int y = Integer.parseInt(yPixel.getText());
         Coordenada coordenada = new Coordenada(x, y);
@@ -42,10 +49,19 @@ public class FrmPainel extends javax.swing.JFrame {
     }
 
     public Line getLine() {
+
+        if ((xEsqLinha.getText().equals("") || (xEsqLinha == null))
+                || (yEsqLinha.getText().equals("") || (yEsqLinha == null))
+                || (xDirLinha.getText().equals("") || (xDirLinha == null))
+                || (yDirLinha.getText().equals("") || (yDirLinha == null))) {
+            JOptionPane.showMessageDialog(null, "Coordenadas sem valores!");
+        }
+
         int x1 = Integer.parseInt(xEsqLinha.getText());
         int y1 = Integer.parseInt(yEsqLinha.getText());
         int x2 = Integer.parseInt(xDirLinha.getText());
         int y2 = Integer.parseInt(yDirLinha.getText());
+
         Coordenada start = new Coordenada(x1, y1);
         Coordenada end = new Coordenada(x2, y2);
         Line line = new Line(start, end, edtNome.getText());
@@ -299,6 +315,7 @@ public class FrmPainel extends javax.swing.JFrame {
             }
         });
 
+        ListaPoligono.setBorder(new javax.swing.border.MatteBorder(null));
         jScrollPane2.setViewportView(ListaPoligono);
 
         xPoligon.addActionListener(new java.awt.event.ActionListener() {
@@ -334,41 +351,38 @@ public class FrmPainel extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(jLabel7))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(xPoligon, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(addPonPol)))
-                .addGap(0, 26, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(addPoligon)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(yPoligon, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(rmvPntPol)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(rmvPntPol))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel7)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(xPoligon, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(addPonPol)))
+                        .addGap(0, 26, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addPoligon))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(19, 19, 19)
                 .addComponent(jLabel7)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(xPoligon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -380,9 +394,9 @@ public class FrmPainel extends javax.swing.JFrame {
                     .addComponent(rmvPntPol))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(addPoligon)
-                .addGap(18, 18, 18))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Poligono", jPanel4);
@@ -429,7 +443,7 @@ public class FrmPainel extends javax.swing.JFrame {
     }//GEN-LAST:event_addPixelActionPerformed
 
     private void xPixelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xPixelActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_xPixelActionPerformed
 
     private void yPixelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yPixelActionPerformed
@@ -478,6 +492,10 @@ public class FrmPainel extends javax.swing.JFrame {
             coordPoligono = new ArrayList<>();
         }
         if (addPonPol != null) {
+            if ((xPoligon.getText().equals("") || (xPoligon == null))
+                    || (yPoligon.getText().equals("") || (yPoligon == null))) {
+                JOptionPane.showMessageDialog(null, "Coordenadas sem valores!");
+            }
             int x = Integer.parseInt(xPoligon.getText());
             int y = Integer.parseInt(yPoligon.getText());
             Coordenada coordenada = new Coordenada(x, y);
@@ -485,15 +503,14 @@ public class FrmPainel extends javax.swing.JFrame {
 
             ListaPoligono.setListData(coordPoligono.toArray());
         }
-
     }//GEN-LAST:event_addPonPolActionPerformed
 
     private void rmvPntPolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rmvPntPolActionPerformed
-        
+
         if ((!coordPoligono.isEmpty()) && (ListaPoligono.getSelectedIndex() >= 0)) {
             coordPoligono.remove(ListaPoligono.getSelectedIndex());
             ListaPoligono.setListData(coordPoligono.toArray());
-            
+
         }
     }//GEN-LAST:event_rmvPntPolActionPerformed
 
