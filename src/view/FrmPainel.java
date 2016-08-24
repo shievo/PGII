@@ -3,11 +3,9 @@ package view;
 import drawable.Line;
 import drawable.Pixel;
 import drawable.Poligon;
-import interfaces.drawable.DrawableInterface;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JList;
 import uteis.Coordenada;
 
 /**
@@ -16,7 +14,6 @@ import uteis.Coordenada;
  */
 public class FrmPainel extends javax.swing.JFrame {
 
-    private Painel painel;
     private List<Coordenada> coordPoligono;
 
     public FrmPainel() {
@@ -106,6 +103,9 @@ public class FrmPainel extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(20, 80));
+        setResizable(false);
+        setSize(new java.awt.Dimension(80, 250));
 
         addPixel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         addPixel.setText("Adicionar");
@@ -116,7 +116,7 @@ public class FrmPainel extends javax.swing.JFrame {
         });
 
         cancelPixel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        cancelPixel.setText("Cancelar");
+        cancelPixel.setText("Limpar");
         cancelPixel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelPixelActionPerformed(evt);
@@ -152,11 +152,12 @@ public class FrmPainel extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cancelPixel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(yPixel)
-                    .addComponent(xPixel))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(yPixel, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                        .addComponent(xPixel))
+                    .addComponent(cancelPixel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +174,7 @@ public class FrmPainel extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cancelPixel)
                     .addComponent(addPixel))
-                .addContainerGap(349, Short.MAX_VALUE))
+                .addContainerGap(416, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Pixel", jPanel1);
@@ -218,7 +219,7 @@ public class FrmPainel extends javax.swing.JFrame {
         });
 
         cancelLinha.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        cancelLinha.setText("Cancelar");
+        cancelLinha.setText("Limpar");
         cancelLinha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelLinhaActionPerformed(evt);
@@ -250,8 +251,8 @@ public class FrmPainel extends javax.swing.JFrame {
                             .addComponent(xDirLinha, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(yEsqLinha, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(yDirLinha, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cancelLinha))))
-                .addContainerGap(84, Short.MAX_VALUE))
+                            .addComponent(cancelLinha, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,7 +277,7 @@ public class FrmPainel extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addLinha)
                     .addComponent(cancelLinha))
-                .addContainerGap(289, Short.MAX_VALUE))
+                .addContainerGap(356, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Linha", jPanel3);
@@ -391,6 +392,11 @@ public class FrmPainel extends javax.swing.JFrame {
         jLabel10.setText("Nome");
 
         edtNome.setText("Objeto");
+        edtNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edtNomeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -412,8 +418,7 @@ public class FrmPainel extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addComponent(jTabbedPane1))
         );
 
         pack();
@@ -495,6 +500,10 @@ public class FrmPainel extends javax.swing.JFrame {
     private void addPoligonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPoligonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addPoligonActionPerformed
+
+    private void edtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edtNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_edtNomeActionPerformed
 
     public Poligon getPoligon() {
         Poligon poligon = new Poligon(coordPoligono, edtNome.getText());

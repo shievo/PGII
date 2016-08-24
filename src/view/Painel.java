@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package view;
 
 import interfaces.drawable.DrawableInterface;
@@ -18,18 +12,18 @@ import uteis.ViewPort;
  *
  * @author Kelvin
  */
-public class Painel extends JPanel{
+public class Painel extends JPanel {
 
     private List<DrawableInterface> lstDrawables;
     private ViewPort viewPort;
-    
+
     public Painel() {
         super();
         lstDrawables = new ArrayList<>();
         this.setBackground(Color.white);
         viewPort = new ViewPort();
     }
-    
+
     public Painel(ViewPort viewPort) {
         super();
         lstDrawables = new ArrayList<>();
@@ -52,21 +46,21 @@ public class Painel extends JPanel{
     public void setViewPort(ViewPort viewPort) {
         this.viewPort = viewPort;
     }
-    
+
     public void addDrawable(DrawableInterface drawable) {
         lstDrawables.add(drawable);
     }
-    
+
     public void removeDrawable(int index) {
         lstDrawables.remove(index);
     }
-    
+
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
+        super.paintComponent(g);
         for (DrawableInterface drawable : lstDrawables) {
             drawable.draw(g, this.viewPort);
         }
-    }    
-    
+    }
+
 }
