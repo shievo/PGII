@@ -454,7 +454,12 @@ public class FrmPainel extends javax.swing.JFrame {
     }//GEN-LAST:event_addPonPolActionPerformed
 
     private void rmvPntPolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rmvPntPolActionPerformed
-        // TODO add your handling code here:
+        
+        if ((!coordPoligono.isEmpty()) && (ListaPoligono.getSelectedIndex() >= 0)) {
+            coordPoligono.remove(ListaPoligono.getSelectedIndex());
+            ListaPoligono.setListData(coordPoligono.toArray());
+            
+        }
     }//GEN-LAST:event_rmvPntPolActionPerformed
 
     public Poligon getPoligon() {
