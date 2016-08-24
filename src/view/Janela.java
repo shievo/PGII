@@ -11,10 +11,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.jws.Oneway;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.border.Border;
 import uteis.Coordenada;
 import uteis.ViewPort;
 
@@ -90,8 +92,6 @@ public class Janela extends JFrame implements ActionListener {
         btnRemove.setBounds(110, 500, 100, 20);
         this.add(btnRemove);
         
-        
-        
         //botoes de movimento
         btnMoveLeft = new JButton(moveLeft);
         btnMoveLeft.setActionCommand(moveLeft);
@@ -125,8 +125,9 @@ public class Janela extends JFrame implements ActionListener {
         this.add(lvDrawable);
 
         //teste
-        painel.addDrawable(new Line(new Coordenada(0, -170), new Coordenada(0, 170)));
-        painel.addDrawable(new Line(new Coordenada(-170, 0), new Coordenada(170, 0)));
+        painel.setBorder(BorderFactory.createEtchedBorder());
+        painel.addDrawable(new Line(new Coordenada(0, -170), new Coordenada(0, 170), "Linha vertical"));
+        painel.addDrawable(new Line(new Coordenada(-170, 0), new Coordenada(170, 0), "Linha horizontal"));
         painel.repaint();
 
         lvDrawable.setListData(painel.getLstDrawables().toArray());

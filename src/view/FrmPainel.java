@@ -39,7 +39,8 @@ public class FrmPainel extends javax.swing.JFrame {
         int x = Integer.parseInt(xPixel.getText());
         int y = Integer.parseInt(yPixel.getText());
         Coordenada coordenada = new Coordenada(x, y);
-        Pixel pixel = new Pixel(coordenada);
+        Pixel pixel = new Pixel(coordenada, edtNome.getText());
+        edtNome.setText("Objeto");
         return pixel;
     }
 
@@ -50,7 +51,8 @@ public class FrmPainel extends javax.swing.JFrame {
         int y2 = Integer.parseInt(yDirLinha.getText());
         Coordenada start = new Coordenada(x1, y1);
         Coordenada end = new Coordenada(x2, y2);
-        Line line = new Line(start, end);
+        Line line = new Line(start, end, edtNome.getText());
+        edtNome.setText("Objeto");
         return line;
     }
 
@@ -89,6 +91,8 @@ public class FrmPainel extends javax.swing.JFrame {
         yPoligon = new javax.swing.JTextField();
         addPonPol = new javax.swing.JButton();
         rmvPntPol = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        edtNome = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -384,17 +388,32 @@ public class FrmPainel extends javax.swing.JFrame {
         jPanel4.getAccessibleContext().setAccessibleName("");
         jPanel4.getAccessibleContext().setAccessibleDescription("");
 
+        jLabel10.setText("Nome");
+
+        edtNome.setText("Objeto");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jTabbedPane1))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(edtNome)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(3, 3, 3)
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
 
         pack();
@@ -478,9 +497,10 @@ public class FrmPainel extends javax.swing.JFrame {
     }//GEN-LAST:event_addPoligonActionPerformed
 
     public Poligon getPoligon() {
-        Poligon poligon = new Poligon(coordPoligono);
+        Poligon poligon = new Poligon(coordPoligono, edtNome.getText());
         coordPoligono = new ArrayList<>();
         ListaPoligono.setListData(coordPoligono.toArray());
+        edtNome.setText("Objeto");
         return poligon;
     }
 
@@ -535,8 +555,10 @@ public class FrmPainel extends javax.swing.JFrame {
     private javax.swing.JButton addPonPol;
     private javax.swing.JButton cancelLinha;
     private javax.swing.JButton cancelPixel;
+    private javax.swing.JTextField edtNome;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

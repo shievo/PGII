@@ -13,11 +13,13 @@ import uteis.ViewPort;
 public class Pixel extends DrawableObject implements DrawableInterface {
     private Coordenada coordenada;
     
-    public Pixel() {
+    public Pixel(String nome) {
+        this.nome = nome;
         coordenada = new Coordenada();
     }
     
-    public Pixel(Coordenada coordenada) {
+    public Pixel(Coordenada coordenada, String nome) {
+        this.nome = nome;
         this.coordenada = coordenada;
     }
 

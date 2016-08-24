@@ -12,11 +12,13 @@ public class Poligon extends DrawableObject implements DrawableInterface {
     
     private List<Coordenada> path;
     
-    public Poligon (){
+    public Poligon (String nome){
+        this.nome = nome;
         path = new ArrayList<>();
     }
     
-    public Poligon (List<Coordenada> path){
+    public Poligon (List<Coordenada> path, String nome){
+        this.nome = nome;
         this.path = path;
     }
 

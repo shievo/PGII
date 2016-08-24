@@ -9,12 +9,14 @@ import uteis.ViewPort;
 public class Line extends DrawableObject implements DrawableInterface {
     private Coordenada start, end;
     
-    public Line() {
+    public Line(String nome) {
+        this.nome = nome;
         start = new Coordenada();
         end = new Coordenada();
     }
     
-    public Line(Coordenada start, Coordenada end) {
+    public Line(Coordenada start, Coordenada end, String nome) {
+        this.nome = nome;
         this.start = start;
         this.end = end;
     }

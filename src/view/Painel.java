@@ -26,7 +26,7 @@ public class Painel extends JPanel{
     public Painel() {
         super();
         lstDrawables = new ArrayList<>();
-        this.setBackground(Color.red);
+        this.setBackground(Color.white);
         viewPort = new ViewPort();
     }
     
@@ -34,7 +34,7 @@ public class Painel extends JPanel{
         super();
         lstDrawables = new ArrayList<>();
         this.viewPort = viewPort;
-        this.setBackground(Color.red);
+        this.setBackground(Color.white);
     }
 
     public List<DrawableInterface> getLstDrawables() {
