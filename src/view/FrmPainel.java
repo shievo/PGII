@@ -567,7 +567,6 @@ public class FrmPainel extends javax.swing.JFrame {
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
-        jPanel5.getAccessibleContext().setAccessibleName("Rotacionar");
         jPanel5.getAccessibleContext().setAccessibleDescription("");
 
         jTabbedPane1.addTab("Transformações", jPanel2);
@@ -699,12 +698,20 @@ public class FrmPainel extends javax.swing.JFrame {
         switch (op) {
 
             case "Translação":
+                jTextCoordX.setEnabled(true);
+                jTextCoordY.setEnabled(true);
+                 jBoxOrigem.setEnabled(false);
+                jRadioButton1.setEnabled(false);
+                jRadioButton2.setEnabled(false);
+                jRadioButton3.setEnabled(false);
+                jTextGraus.setEnabled(false);
 
                 break;
             case "Rotação":
 
                 jTextCoordX.setEnabled(false);
                 jTextCoordY.setEnabled(false);
+                 jBoxOrigem.setEnabled(false);
                 jRadioButton1.setEnabled(true);
                 jRadioButton2.setEnabled(true);
                 jRadioButton3.setEnabled(true);
@@ -721,7 +728,6 @@ public class FrmPainel extends javax.swing.JFrame {
                 break;
             default:
                 break;
-
         }
 
     }//GEN-LAST:event_jComboBox2ActionPerformed
