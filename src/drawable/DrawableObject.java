@@ -10,9 +10,6 @@ public class DrawableObject {
 
     protected String nome;
 
-    protected void getCordenada(ViewPort viewPort, int x, int y) {
-    }
-
     public String getNome() {
         return nome;
     }
