@@ -28,7 +28,7 @@ public class Convert {
     public static Coordenada toViewPort(Coordenada coordenada, ViewPort viewPort) {
         int x = calcX(coordenada, viewPort);
         int y = calcY(coordenada, viewPort);
-        return new Coordenada(x, y);
+        return new Coordenada(x, y, 1);
     }
 
 }

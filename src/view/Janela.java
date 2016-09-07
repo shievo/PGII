@@ -113,8 +113,8 @@ public class Janela extends JFrame {
 
         //teste
         painel.setBorder(BorderFactory.createEtchedBorder());
-        painel.addDrawable(new Line(new Coordenada(0, -170), new Coordenada(0, 170), "Linha vertical"));
-        painel.addDrawable(new Line(new Coordenada(-170, 0), new Coordenada(170, 0), "Linha horizontal"));
+        painel.addDrawable(new Line(new Coordenada(0, -170, 1), new Coordenada(0, 170, 1), "Linha vertical"));
+        painel.addDrawable(new Line(new Coordenada(-170, 0, 1), new Coordenada(170, 0, 1), "Linha horizontal"));
         painel.repaint();
 
         lvDrawable.setListData(painel.getLstDrawables().toArray());

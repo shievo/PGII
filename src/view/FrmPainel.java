@@ -41,7 +41,7 @@ public class FrmPainel extends javax.swing.JFrame {
         int x, y;
         x = Integer.parseInt(transformCoordX.getText().toString());
         y = Integer.parseInt(transformCoordY.getText().toString());
-        return new Coordenada(x, y);
+        return new Coordenada(x, y, 1);
     }
     
     public Integer getOperacaoTransformacao() {
@@ -57,7 +57,7 @@ public class FrmPainel extends javax.swing.JFrame {
 
         int x = Integer.parseInt(xPixel.getText());
         int y = Integer.parseInt(yPixel.getText());
-        Coordenada coordenada = new Coordenada(x, y);
+        Coordenada coordenada = new Coordenada(x, y, 1);
         Pixel pixel = new Pixel(coordenada, edtNome.getText());
         edtNome.setText("Objeto");
         return pixel;
@@ -76,8 +76,8 @@ public class FrmPainel extends javax.swing.JFrame {
         int x2 = Integer.parseInt(xDirLinha.getText());
         int y2 = Integer.parseInt(yDirLinha.getText());
 
-        Coordenada start = new Coordenada(x1, y1);
-        Coordenada end = new Coordenada(x2, y2);
+        Coordenada start = new Coordenada(x1, y1, 1);
+        Coordenada end = new Coordenada(x2, y2, 1);
         Line line = new Line(start, end, edtNome.getText());
         edtNome.setText("Objeto");
         return line;
@@ -679,7 +679,7 @@ public class FrmPainel extends javax.swing.JFrame {
             int x = Integer.parseInt(xPoligon.getText());
             int y = Integer.parseInt(yPoligon.getText());
             
-            Coordenada coordenada = new Coordenada(x, y);
+            Coordenada coordenada = new Coordenada(x, y, 1);
             coordPoligono.add(coordenada);
 
             ListaPoligono.setListData(coordPoligono.toArray());

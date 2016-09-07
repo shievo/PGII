@@ -4,6 +4,7 @@ import interfaces.drawable.DrawableInterface;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
+import uteis.Calcular;
 import uteis.Convert;
 import uteis.Coordenada;
 import uteis.ViewPort;
@@ -52,11 +53,7 @@ public class Poligon extends DrawableObject implements DrawableInterface {
         if (this.path.isEmpty()) {
             return;
         }
-        List<Coordenada> newPath = new ArrayList<>();
-        for (Coordenada coordenada : this.path) {
-            coordenada = coordenada.add(incPoint);
-            newPath.add(coordenada);
-        }
-        this.path = newPath;
+        List<Coordenada> incMatrix = Calcular.genDefMatiz(path.size(), incPoint);
+        this.path = Calcular.somarMatrizCoordenada(path, incMatrix);
     }
 }

@@ -12,4 +12,6 @@ public interface DrawableInterface {
     
     public void translation(Coordenada incPoint);
     
+    //public void escalonar();
+    
 }
