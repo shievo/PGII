@@ -31,4 +31,11 @@ public class Line extends DrawableObject implements DrawableInterface {
         Coordenada convert2 = Convert.toViewPort(end, viewPort);
         graphics.drawLine(convert1.getX(), convert1.getY(), convert2.getX(), convert2.getY());
     }
+    
+    @Override
+    public void translation(Coordenada incPoint) {
+        this.end = this.end.add(incPoint);
+        this.start = this.start.add(incPoint);
+    }
+        
 }

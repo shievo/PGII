@@ -32,5 +32,10 @@ public class Pixel extends DrawableObject implements DrawableInterface {
         int y = convertCoordenada.getY();
         graphics.drawLine(x, y, x, y);
     }
+    
+    @Override
+    public void translation(Coordenada incPoint) {
+        this.coordenada = this.coordenada.add(incPoint);
+    }
 
 }

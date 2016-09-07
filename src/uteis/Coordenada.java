@@ -34,6 +34,17 @@ public class Coordenada {
         return "x=" + x + ", y=" + y;
     }
     
+    public Coordenada add(Coordenada other) {
+        int x, y;
+        
+        x = this.getX();
+        x += other.getX();
+        
+        y = this.getY();
+        y += other.getY();
+        
+        return new Coordenada(x, y);
+    }
     
     
 }
