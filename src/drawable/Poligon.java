@@ -57,5 +57,6 @@ public class Poligon extends DrawableObject implements DrawableInterface {
             coordenada = coordenada.add(incPoint);
             newPath.add(coordenada);
         }
+        this.path = newPath;
     }
 }

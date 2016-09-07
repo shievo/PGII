@@ -32,6 +32,21 @@ public class FrmPainel extends javax.swing.JFrame {
     public void setActionAddPoligon(ActionListener listner) {
         addPoligon.addActionListener(listner);
     }
+    
+    public void setActionAplicar(ActionListener listner) {
+        btnAplicar.addActionListener(listner);
+    }
+    
+    public Coordenada getTransformCoordenada() {
+        int x, y;
+        x = Integer.parseInt(transformCoordX.getText().toString());
+        y = Integer.parseInt(transformCoordY.getText().toString());
+        return new Coordenada(x, y);
+    }
+    
+    public Integer getOperacaoTransformacao() {
+        return operacaoTransformacao.getSelectedIndex();
+    }
 
     public Pixel getPixel() {
 
@@ -49,7 +64,6 @@ public class FrmPainel extends javax.swing.JFrame {
     }
 
     public Line getLine() {
-
         if ((xEsqLinha.getText().equals("") || (xEsqLinha == null))
                 || (yEsqLinha.getText().equals("") || (yEsqLinha == null))
                 || (xDirLinha.getText().equals("") || (xDirLinha == null))
@@ -106,11 +120,11 @@ public class FrmPainel extends javax.swing.JFrame {
         addPonPol = new javax.swing.JButton();
         rmvPntPol = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        operacaoTransformacao = new javax.swing.JComboBox<String>();
         jLabel11 = new javax.swing.JLabel();
-        jTextCoordX = new javax.swing.JTextField();
+        transformCoordX = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jTextCoordY = new javax.swing.JTextField();
+        transformCoordY = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
@@ -119,7 +133,7 @@ public class FrmPainel extends javax.swing.JFrame {
         jTextGraus = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jBoxOrigem = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        btnAplicar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         edtNome = new javax.swing.JTextField();
 
@@ -135,10 +149,8 @@ public class FrmPainel extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setLocation(new java.awt.Point(85, 80));
         setPreferredSize(new java.awt.Dimension(320, 600));
         setResizable(false);
-        setSize(new java.awt.Dimension(90, 250));
 
         addPixel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         addPixel.setText("Adicionar");
@@ -420,19 +432,19 @@ public class FrmPainel extends javax.swing.JFrame {
         jPanel4.getAccessibleContext().setAccessibleName("");
         jPanel4.getAccessibleContext().setAccessibleDescription("");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Translação", "Rotação", "Escalonamento" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        operacaoTransformacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Translação", "Rotação", "Escalonamento" }));
+        operacaoTransformacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                operacaoTransformacaoActionPerformed(evt);
             }
         });
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setText("Coordenada X: ");
 
-        jTextCoordX.addActionListener(new java.awt.event.ActionListener() {
+        transformCoordX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextCoordXActionPerformed(evt);
+                transformCoordXActionPerformed(evt);
             }
         });
 
@@ -517,9 +529,9 @@ public class FrmPainel extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setText("Aplicar ");
-        jButton1.setToolTipText("");
+        btnAplicar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnAplicar.setText("Aplicar ");
+        btnAplicar.setToolTipText("");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -531,17 +543,17 @@ public class FrmPainel extends javax.swing.JFrame {
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(operacaoTransformacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBoxOrigem)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextCoordY, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(transformCoordY, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextCoordX, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton1))
+                                .addComponent(transformCoordX, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnAplicar))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -549,21 +561,21 @@ public class FrmPainel extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(operacaoTransformacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(81, 81, 81)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jTextCoordX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(transformCoordX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextCoordY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(transformCoordY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jBoxOrigem)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnAplicar)
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
@@ -691,15 +703,15 @@ public class FrmPainel extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_edtNomeActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void operacaoTransformacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operacaoTransformacaoActionPerformed
 
-        String op = jComboBox2.getSelectedItem().toString();
+        String op = operacaoTransformacao.getSelectedItem().toString();
 
         switch (op) {
 
             case "Translação":
-                jTextCoordX.setEnabled(true);
-                jTextCoordY.setEnabled(true);
+                transformCoordX.setEnabled(true);
+                transformCoordY.setEnabled(true);
                  jBoxOrigem.setEnabled(false);
                 jRadioButton1.setEnabled(false);
                 jRadioButton2.setEnabled(false);
@@ -709,8 +721,8 @@ public class FrmPainel extends javax.swing.JFrame {
                 break;
             case "Rotação":
 
-                jTextCoordX.setEnabled(false);
-                jTextCoordY.setEnabled(false);
+                transformCoordX.setEnabled(false);
+                transformCoordY.setEnabled(false);
                  jBoxOrigem.setEnabled(false);
                 jRadioButton1.setEnabled(true);
                 jRadioButton2.setEnabled(true);
@@ -718,8 +730,8 @@ public class FrmPainel extends javax.swing.JFrame {
                 jTextGraus.setEnabled(true);
                 break;
             case "Escalonamento":
-                jTextCoordX.setEnabled(true);
-                jTextCoordY.setEnabled(true);
+                transformCoordX.setEnabled(true);
+                transformCoordY.setEnabled(true);
                 jBoxOrigem.setEnabled(true);
                 jRadioButton1.setEnabled(false);
                 jRadioButton2.setEnabled(false);
@@ -730,15 +742,15 @@ public class FrmPainel extends javax.swing.JFrame {
                 break;
         }
 
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_operacaoTransformacaoActionPerformed
 
     private void jBoxOrigemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBoxOrigemActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBoxOrigemActionPerformed
 
-    private void jTextCoordXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCoordXActionPerformed
+    private void transformCoordXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transformCoordXActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCoordXActionPerformed
+    }//GEN-LAST:event_transformCoordXActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         
@@ -801,13 +813,12 @@ public class FrmPainel extends javax.swing.JFrame {
     private javax.swing.JButton addPixel;
     private javax.swing.JButton addPoligon;
     private javax.swing.JButton addPonPol;
+    private javax.swing.JButton btnAplicar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton cancelLinha;
     private javax.swing.JButton cancelPixel;
     private javax.swing.JTextField edtNome;
     private javax.swing.JCheckBox jBoxOrigem;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -833,10 +844,11 @@ public class FrmPainel extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextCoordX;
-    private javax.swing.JTextField jTextCoordY;
     private javax.swing.JTextField jTextGraus;
+    private javax.swing.JComboBox<String> operacaoTransformacao;
     private javax.swing.JButton rmvPntPol;
+    private javax.swing.JTextField transformCoordX;
+    private javax.swing.JTextField transformCoordY;
     private javax.swing.JTextField xDirLinha;
     public javax.swing.JTextField xEsqLinha;
     private javax.swing.JTextField xPixel;

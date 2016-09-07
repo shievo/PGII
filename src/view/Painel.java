@@ -54,7 +54,15 @@ public class Painel extends JPanel {
     public void removeDrawable(int index) {
         lstDrawables.remove(index);
     }
+    
+    public void updateDrawable(int index, DrawableInterface drawable) {
+        lstDrawables.set(index, drawable);
+    }
 
+    public DrawableInterface getDrawable(int index) {
+        return lstDrawables.get(index);
+    }
+    
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
