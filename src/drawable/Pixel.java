@@ -37,5 +37,10 @@ public class Pixel extends DrawableObject implements DrawableInterface {
     public void translation(Coordenada incPoint) {
         this.coordenada = this.coordenada.add(incPoint);
     }
+    
+    @Override
+    public void escalonar(Coordenada fator) {
+        //nao faz nada , nao ha como aumentar um pixel
+    }
 
 }

@@ -245,6 +245,7 @@ public class Janela extends JFrame {
         private Map<Integer, ButtonClick> buttonClicks = new HashMap<Integer, ButtonClick>();
 
         private class AplicarTransalacao implements ButtonClick {
+
             @Override
             public void click() {
                 int selectedIndex = lvDrawable.getSelectedIndex();
@@ -259,9 +260,25 @@ public class Janela extends JFrame {
 
         }
 
+        private class AplicarEscalonamento implements ButtonClick {
+
+            @Override
+            public void click() {
+                int selectedIndex = lvDrawable.getSelectedIndex();
+                if ((!painel.getLstDrawables().isEmpty()) && (selectedIndex >= 0)) {
+                    DrawableInterface drawable = painel.getDrawable(selectedIndex);
+                    Coordenada incPoint = frm.getTransformCoordenada();
+                    drawable.escalonar(incPoint);
+                    painel.updateDrawable(selectedIndex, drawable);
+                    painel.repaint();
+                }
+            }
+        }
+
         public AplicarAlteracao() {
             super();
             buttonClicks.put(0, new AplicarTransalacao());
+            buttonClicks.put(2, new AplicarEscalonamento());
         }
 
         @Override

@@ -2,6 +2,8 @@ package drawable;
 
 import interfaces.drawable.DrawableInterface;
 import java.awt.Graphics;
+import java.util.List;
+import uteis.Calcular;
 import uteis.Convert;
 import uteis.Coordenada;
 import uteis.ViewPort;
@@ -38,4 +40,10 @@ public class Line extends DrawableObject implements DrawableInterface {
         this.start = this.start.add(incPoint);
     }
         
+    @Override
+    public void escalonar(Coordenada fator) {
+        List<Coordenada> matrizEscalonamento = Calcular.getMatrizEscalonamento(fator);
+        this.start = Calcular.multiplicarMatrizCoordenada(start, matrizEscalonamento);
+        this.end = Calcular.multiplicarMatrizCoordenada(end, matrizEscalonamento);
+    }
 }

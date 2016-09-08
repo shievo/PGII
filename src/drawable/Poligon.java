@@ -53,7 +53,26 @@ public class Poligon extends DrawableObject implements DrawableInterface {
         if (this.path.isEmpty()) {
             return;
         }
-        List<Coordenada> incMatrix = Calcular.genDefMatiz(path.size(), incPoint);
-        this.path = Calcular.somarMatrizCoordenada(path, incMatrix);
+        List<Coordenada> translateMatrix = Calcular.getMatrizTranslacao(incPoint);
+        List<Coordenada> newPath = new ArrayList<>();
+        for (Coordenada coordenada : this.path) {
+          coordenada = Calcular.multiplicarMatrizCoordenada(coordenada, translateMatrix);
+          newPath.add(coordenada);
+        }
+        this.path = newPath;
+    }
+    
+    @Override
+    public void escalonar(Coordenada fator) {
+        if (this.path.isEmpty())
+            return;
+        
+        List<Coordenada> matrizEscalonamento = Calcular.getMatrizEscalonamento(fator);
+        List<Coordenada> newPath = new ArrayList<>();
+        for (Coordenada coordenada : this.path) {
+            coordenada = Calcular.multiplicarMatrizCoordenada(coordenada, matrizEscalonamento);
+            newPath.add(coordenada);
+        }
+        this.path = newPath;
     }
 }
