@@ -37,17 +37,30 @@ public class FrmPainel extends javax.swing.JFrame {
         btnAplicar.addActionListener(listner);
     }
     
+    public boolean getEmRelacaoOrigem() {
+        return emRelacaoOrigem.isSelected();
+    }
+    
     public Coordenada getTransformCoordenada() {
-        int x, y;
-        x = Integer.parseInt(transformCoordX.getText().toString());
-        y = Integer.parseInt(transformCoordY.getText().toString());
-        return new Coordenada(x, y, 1);
+        try {
+            float x, y;
+            x = Float.parseFloat(transformCoordX.getText().toString());
+            y = Float.parseFloat(transformCoordY.getText().toString());
+            return new Coordenada(x, y, 1f);
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "Valores invalidos (obs: utilize \".\" para valores com quebra decimal)");
+            return new Coordenada(1, 1, 1);   
+        }
     }
     
     public Integer getOperacaoTransformacao() {
         return operacaoTransformacao.getSelectedIndex();
     }
 
+    public Integer getAngulo() {
+        return Integer.valueOf(angulo.getText().toString());
+    }
+    
     public Pixel getPixel() {
 
         if ((xPixel.getText().equals("") || (xPixel == null))
@@ -130,9 +143,9 @@ public class FrmPainel extends javax.swing.JFrame {
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
         jLabel13 = new javax.swing.JLabel();
-        jTextGraus = new javax.swing.JTextField();
+        angulo = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jBoxOrigem = new javax.swing.JCheckBox();
+        emRelacaoOrigem = new javax.swing.JCheckBox();
         btnAplicar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         edtNome = new javax.swing.JTextField();
@@ -149,7 +162,6 @@ public class FrmPainel extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(320, 600));
         setResizable(false);
 
         addPixel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -480,7 +492,7 @@ public class FrmPainel extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel13.setText("graus");
 
-        jTextGraus.setEnabled(false);
+        angulo.setEnabled(false);
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel14.setText("Aplicar rotação de ");
@@ -493,7 +505,7 @@ public class FrmPainel extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextGraus, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(angulo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(87, Short.MAX_VALUE))
@@ -509,7 +521,7 @@ public class FrmPainel extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextGraus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(angulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel14))
                 .addGap(18, 18, 18)
@@ -521,11 +533,11 @@ public class FrmPainel extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        jBoxOrigem.setText("Em relação a Origem");
-        jBoxOrigem.setEnabled(false);
-        jBoxOrigem.addActionListener(new java.awt.event.ActionListener() {
+        emRelacaoOrigem.setText("Em relação a Origem");
+        emRelacaoOrigem.setEnabled(false);
+        emRelacaoOrigem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBoxOrigemActionPerformed(evt);
+                emRelacaoOrigemActionPerformed(evt);
             }
         });
 
@@ -544,7 +556,7 @@ public class FrmPainel extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(operacaoTransformacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBoxOrigem)
+                            .addComponent(emRelacaoOrigem)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -571,7 +583,7 @@ public class FrmPainel extends javax.swing.JFrame {
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(transformCoordY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addComponent(jBoxOrigem)
+                .addComponent(emRelacaoOrigem)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -712,31 +724,31 @@ public class FrmPainel extends javax.swing.JFrame {
             case "Translação":
                 transformCoordX.setEnabled(true);
                 transformCoordY.setEnabled(true);
-                 jBoxOrigem.setEnabled(false);
+                 emRelacaoOrigem.setEnabled(false);
                 jRadioButton1.setEnabled(false);
                 jRadioButton2.setEnabled(false);
                 jRadioButton3.setEnabled(false);
-                jTextGraus.setEnabled(false);
+                angulo.setEnabled(false);
 
                 break;
             case "Rotação":
 
                 transformCoordX.setEnabled(false);
                 transformCoordY.setEnabled(false);
-                 jBoxOrigem.setEnabled(false);
+                 emRelacaoOrigem.setEnabled(false);
                 jRadioButton1.setEnabled(true);
                 jRadioButton2.setEnabled(true);
                 jRadioButton3.setEnabled(true);
-                jTextGraus.setEnabled(true);
+                angulo.setEnabled(true);
                 break;
             case "Escalonamento":
                 transformCoordX.setEnabled(true);
                 transformCoordY.setEnabled(true);
-                jBoxOrigem.setEnabled(true);
+                emRelacaoOrigem.setEnabled(true);
                 jRadioButton1.setEnabled(false);
                 jRadioButton2.setEnabled(false);
                 jRadioButton3.setEnabled(false);
-                jTextGraus.setEnabled(false);
+                angulo.setEnabled(false);
                 break;
             default:
                 break;
@@ -744,9 +756,9 @@ public class FrmPainel extends javax.swing.JFrame {
 
     }//GEN-LAST:event_operacaoTransformacaoActionPerformed
 
-    private void jBoxOrigemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBoxOrigemActionPerformed
+    private void emRelacaoOrigemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emRelacaoOrigemActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jBoxOrigemActionPerformed
+    }//GEN-LAST:event_emRelacaoOrigemActionPerformed
 
     private void transformCoordXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transformCoordXActionPerformed
         // TODO add your handling code here:
@@ -813,12 +825,13 @@ public class FrmPainel extends javax.swing.JFrame {
     private javax.swing.JButton addPixel;
     private javax.swing.JButton addPoligon;
     private javax.swing.JButton addPonPol;
+    private javax.swing.JTextField angulo;
     private javax.swing.JButton btnAplicar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton cancelLinha;
     private javax.swing.JButton cancelPixel;
     private javax.swing.JTextField edtNome;
-    private javax.swing.JCheckBox jBoxOrigem;
+    private javax.swing.JCheckBox emRelacaoOrigem;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -844,7 +857,6 @@ public class FrmPainel extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextGraus;
     private javax.swing.JComboBox<String> operacaoTransformacao;
     private javax.swing.JButton rmvPntPol;
     private javax.swing.JTextField transformCoordX;

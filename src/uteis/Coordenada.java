@@ -1,22 +1,29 @@
 package uteis;
 
 public class Coordenada {
-    private int x, y, z;
+
+    private float x, y, z;
 
     public Coordenada() {
         this.x = 0;
         this.y = 0;
         this.z = 0;
     }
-    
+
     public Coordenada(int x, int y, int z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
+    public Coordenada(float x, float y, float z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
     public int getX() {
-        return x;
+        return Math.round(x);
     }
 
     public void setX(int x) {
@@ -24,26 +31,41 @@ public class Coordenada {
     }
 
     public int getY() {
-        return y;
+        return Math.round(y);
     }
 
     public void setY(int y) {
         this.y = y;
     }
-    
+
     public int getZ() {
-        return z;
+        return Math.round(z);
     }
 
     public void setZ(int z) {
         this.z = z;
     }
-    
+
     public int get(int index) {
         switch (index) {
-            case 0: return x;
-            case 1: return y;
-            case 2: return z;
+            case 0:
+                return Math.round(x);
+            case 1:
+                return Math.round(y);
+            case 2:
+                return Math.round(z);
+        }
+        return 0;
+    }
+
+    public float getAsFloat(int index) {
+        switch (index) {
+            case 0:
+                return x;
+            case 1:
+                return y;
+            case 2:
+                return z;
         }
         return 0;
     }
@@ -52,21 +74,47 @@ public class Coordenada {
     public String toString() {
         return "x=" + x + ", y=" + y;//por hora nao sera impresso z
     }
-    
+
     public Coordenada add(Coordenada other) {
-        int x, y, z;
-        
-        x = this.getX();
-        x += other.getX();
-        
-        y = this.getY();
-        y += other.getY();
-        
-        z = this.getZ();
-        z += other.getZ();
-        
+        float x, y, z;
+
+        x = this.getXasFloat();
+        x += other.getXasFloat();
+
+        y = this.getYasFloat();
+        y += other.getYasFloat();
+
+        z = this.getZasFloat();
+        z += other.getZasFloat();
+
         return new Coordenada(x, y, z);
     }
     
-    
+    public Coordenada subtract(Coordenada other) {
+        float x, y, z;
+
+        x = this.getXasFloat();
+        x -= other.getXasFloat();
+
+        y = this.getYasFloat();
+        y -= other.getYasFloat();
+
+        z = this.getZasFloat();
+        z -= other.getZasFloat();
+
+        return new Coordenada(x, y, z);
+    }
+
+    public float getXasFloat() {
+        return x;
+    }
+
+    public float getYasFloat() {
+        return y;
+    }
+
+    public float getZasFloat() {
+        return z;
+    }
+
 }

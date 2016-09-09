@@ -10,27 +10,27 @@ import uteis.Coordenada;
 import uteis.ViewPort;
 
 public class Poligon extends DrawableObject implements DrawableInterface {
-
+    
     private List<Coordenada> path;
-
+    
     public Poligon(String nome) {
         this.nome = nome;
         path = new ArrayList<>();
     }
-
+    
     public Poligon(List<Coordenada> path, String nome) {
         this.nome = nome;
         this.path = path;
     }
-
+    
     public List<Coordenada> getPath() {
         return path;
     }
-
+    
     public void setPath(List<Coordenada> path) {
         this.path = path;
     }
-
+    
     @Override
     public void draw(Graphics graphics, ViewPort viewPort) {
         if (path.isEmpty()) {
@@ -38,7 +38,7 @@ public class Poligon extends DrawableObject implements DrawableInterface {
         }
         int xPoints[] = new int[path.size()];
         int yPoints[] = new int[path.size()];
-
+        
         for (Coordenada coordenada : path) {
             int position = path.indexOf(coordenada);
             Coordenada convertCoordenada = Convert.toViewPort(coordenada, viewPort);
@@ -47,30 +47,62 @@ public class Poligon extends DrawableObject implements DrawableInterface {
         }
         graphics.drawPolygon(xPoints, yPoints, path.size());
     }
-
+    
     @Override
     public void translation(Coordenada incPoint) {
         if (this.path.isEmpty()) {
             return;
         }
         List<Coordenada> translateMatrix = Calcular.getMatrizTranslacao(incPoint);
+        for (int i = 0; i<this.path.size(); i++) {
+            Coordenada coordenada = this.path.get(i);
+            coordenada = Calcular.multiplicarMatrizCoordenadaAsFloat(coordenada, translateMatrix);
+            this.path.set(i, coordenada);
+        }
+    }
+    
+    @Override
+    public void escalonar(Coordenada fator, boolean emRelacaoOrigem) {
+        if (this.path.isEmpty()) {
+            return;
+        }
+        
+        Coordenada origem = this.path.get(0);
+        List<Coordenada> matrizEscalonamento = Calcular.getMatrizEscalonamento(fator);
+        for (int i = 0; i<this.path.size(); i++) {
+            Coordenada coordenada = this.path.get(i);
+            coordenada = Calcular.multiplicarMatrizCoordenadaAsFloat(coordenada, matrizEscalonamento);
+            this.path.set(i, coordenada);
+        }
+        
+        if (emRelacaoOrigem) {
+            translation(origem.subtract(this.path.get(0)));
+        }
+    }
+    
+    @Override
+    public void refletir(Coordenada reflexao) {
+        if (this.path.isEmpty()) {
+            return;
+        }
+        List<Coordenada> matrizEscalonamento = Calcular.getMatrizReflexao(reflexao);
         List<Coordenada> newPath = new ArrayList<>();
         for (Coordenada coordenada : this.path) {
-          coordenada = Calcular.multiplicarMatrizCoordenada(coordenada, translateMatrix);
-          newPath.add(coordenada);
+            coordenada = Calcular.multiplicarMatrizCoordenada(coordenada, matrizEscalonamento);
+            newPath.add(coordenada);
         }
         this.path = newPath;
     }
     
     @Override
-    public void escalonar(Coordenada fator) {
-        if (this.path.isEmpty())
+    public void rotacionar(double angulo) {
+        if (this.path.isEmpty()) {
             return;
-        
-        List<Coordenada> matrizEscalonamento = Calcular.getMatrizEscalonamento(fator);
+        }
+        List<Coordenada> matrizRotacao = Calcular.getMatrizRotacao(angulo);
         List<Coordenada> newPath = new ArrayList<>();
         for (Coordenada coordenada : this.path) {
-            coordenada = Calcular.multiplicarMatrizCoordenada(coordenada, matrizEscalonamento);
+            coordenada = Calcular.multiplicarMatrizCoordenadaAsFloat(coordenada, matrizRotacao);
             newPath.add(coordenada);
         }
         this.path = newPath;

@@ -41,9 +41,27 @@ public class Line extends DrawableObject implements DrawableInterface {
     }
         
     @Override
-    public void escalonar(Coordenada fator) {
+    public void escalonar(Coordenada fator, boolean emRelacaoOrigem) {
         List<Coordenada> matrizEscalonamento = Calcular.getMatrizEscalonamento(fator);
-        this.start = Calcular.multiplicarMatrizCoordenada(start, matrizEscalonamento);
-        this.end = Calcular.multiplicarMatrizCoordenada(end, matrizEscalonamento);
+        Coordenada origem = this.start;
+        this.start = Calcular.multiplicarMatrizCoordenadaAsFloat(start, matrizEscalonamento);
+        this.end = Calcular.multiplicarMatrizCoordenadaAsFloat(end, matrizEscalonamento);
+        if (emRelacaoOrigem) {
+            translation(origem.subtract(this.start));
+        }
+    }
+    
+    @Override
+    public void refletir(Coordenada reflexao) {
+        List<Coordenada> matrizReflexao = Calcular.getMatrizReflexao(reflexao);
+        this.start = Calcular.multiplicarMatrizCoordenada(this.start, matrizReflexao);
+        this.end = Calcular.multiplicarMatrizCoordenada(this.end, matrizReflexao);
+    }
+
+    @Override
+    public void rotacionar(double angulo) {
+        List<Coordenada> matrizRotacao = Calcular.getMatrizRotacao(angulo);
+        this.start = Calcular.multiplicarMatrizCoordenadaAsFloat(this.start, matrizRotacao);
+        this.end = Calcular.multiplicarMatrizCoordenadaAsFloat(this.end, matrizRotacao);
     }
 }

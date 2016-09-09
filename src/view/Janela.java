@@ -268,17 +268,48 @@ public class Janela extends JFrame {
                 if ((!painel.getLstDrawables().isEmpty()) && (selectedIndex >= 0)) {
                     DrawableInterface drawable = painel.getDrawable(selectedIndex);
                     Coordenada incPoint = frm.getTransformCoordenada();
-                    drawable.escalonar(incPoint);
+                    drawable.escalonar(incPoint, frm.getEmRelacaoOrigem());
                     painel.updateDrawable(selectedIndex, drawable);
                     painel.repaint();
                 }
             }
         }
 
+        private class AplicarReflexao implements ButtonClick {
+
+            @Override
+            public void click() {
+                int selectedIndex = lvDrawable.getSelectedIndex();
+                if ((!painel.getLstDrawables().isEmpty()) && (selectedIndex >= 0)) {
+                    DrawableInterface drawable = painel.getDrawable(selectedIndex);
+                    Coordenada incPoint = frm.getTransformCoordenada();
+                    drawable.refletir(incPoint);
+                    painel.updateDrawable(selectedIndex, drawable);
+                    painel.repaint();
+                }
+            }
+        }
+        
+        private class AplicarRotacao implements ButtonClick {
+
+            @Override
+            public void click() {
+                int selectedIndex = lvDrawable.getSelectedIndex();
+                if ((!painel.getLstDrawables().isEmpty()) && (selectedIndex >= 0)) {
+                    DrawableInterface drawable = painel.getDrawable(selectedIndex);
+                    drawable.rotacionar(frm.getAngulo());
+                    painel.updateDrawable(selectedIndex, drawable);
+                    painel.repaint();
+                }
+            }
+        }
+        
         public AplicarAlteracao() {
             super();
             buttonClicks.put(0, new AplicarTransalacao());
+            buttonClicks.put(1, new AplicarRotacao());
             buttonClicks.put(2, new AplicarEscalonamento());
+            buttonClicks.put(3, new AplicarReflexao());
         }
 
         @Override

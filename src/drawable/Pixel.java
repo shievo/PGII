@@ -6,6 +6,8 @@ package drawable;
 
 import interfaces.drawable.DrawableInterface;
 import java.awt.Graphics;
+import java.util.List;
+import uteis.Calcular;
 import uteis.Convert;
 import uteis.Coordenada;
 import uteis.ViewPort;
@@ -39,8 +41,21 @@ public class Pixel extends DrawableObject implements DrawableInterface {
     }
     
     @Override
-    public void escalonar(Coordenada fator) {
+    public void escalonar(Coordenada fator, boolean emRelacaoOrigem) {
         //nao faz nada , nao ha como aumentar um pixel
     }
+
+    @Override
+    public void refletir(Coordenada reflexao) {
+        List<Coordenada> matrizReflexao = Calcular.getMatrizReflexao(reflexao);
+        this.coordenada = Calcular.multiplicarMatrizCoordenada(this.coordenada, matrizReflexao);
+    }
+
+    @Override
+    public void rotacionar(double angulo) {
+        List<Coordenada> matrizRotacao = Calcular.getMatrizRotacao(angulo);
+        this.coordenada = Calcular.multiplicarMatrizCoordenadaAsFloat(this.coordenada, matrizRotacao);
+    }
+    
 
 }
