@@ -133,7 +133,7 @@ public class FrmPainel extends javax.swing.JFrame {
         addPonPol = new javax.swing.JButton();
         rmvPntPol = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        operacaoTransformacao = new javax.swing.JComboBox<String>();
+        operacaoTransformacao = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         transformCoordX = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
@@ -147,6 +147,8 @@ public class FrmPainel extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         emRelacaoOrigem = new javax.swing.JCheckBox();
         btnAplicar = new javax.swing.JButton();
+        reflexaoX = new javax.swing.JCheckBox();
+        reflexaoY = new javax.swing.JCheckBox();
         jLabel10 = new javax.swing.JLabel();
         edtNome = new javax.swing.JTextField();
 
@@ -444,7 +446,7 @@ public class FrmPainel extends javax.swing.JFrame {
         jPanel4.getAccessibleContext().setAccessibleName("");
         jPanel4.getAccessibleContext().setAccessibleDescription("");
 
-        operacaoTransformacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Translação", "Rotação", "Escalonamento" }));
+        operacaoTransformacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Translação", "Rotação", "Escalonamento", "Reflexão", "Cisalhamento" }));
         operacaoTransformacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 operacaoTransformacaoActionPerformed(evt);
@@ -545,6 +547,10 @@ public class FrmPainel extends javax.swing.JFrame {
         btnAplicar.setText("Aplicar ");
         btnAplicar.setToolTipText("");
 
+        reflexaoX.setText("Em torno do eixo x");
+
+        reflexaoY.setText("Em torno do eixo Y");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -555,6 +561,8 @@ public class FrmPainel extends javax.swing.JFrame {
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(reflexaoY)
+                            .addComponent(reflexaoX)
                             .addComponent(operacaoTransformacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(emRelacaoOrigem)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -584,11 +592,15 @@ public class FrmPainel extends javax.swing.JFrame {
                     .addComponent(transformCoordY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(emRelacaoOrigem)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(reflexaoX)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(reflexaoY)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAplicar)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel5.getAccessibleContext().setAccessibleDescription("");
@@ -724,22 +736,26 @@ public class FrmPainel extends javax.swing.JFrame {
             case "Translação":
                 transformCoordX.setEnabled(true);
                 transformCoordY.setEnabled(true);
-                 emRelacaoOrigem.setEnabled(false);
+                emRelacaoOrigem.setEnabled(false);
                 jRadioButton1.setEnabled(false);
                 jRadioButton2.setEnabled(false);
                 jRadioButton3.setEnabled(false);
                 angulo.setEnabled(false);
+                reflexaoX.setEnabled(false);
+                reflexaoY.setEnabled(false);
 
                 break;
             case "Rotação":
 
                 transformCoordX.setEnabled(false);
                 transformCoordY.setEnabled(false);
-                 emRelacaoOrigem.setEnabled(false);
+                emRelacaoOrigem.setEnabled(false);
                 jRadioButton1.setEnabled(true);
                 jRadioButton2.setEnabled(true);
                 jRadioButton3.setEnabled(true);
                 angulo.setEnabled(true);
+                reflexaoX.setEnabled(false);
+                reflexaoY.setEnabled(false);
                 break;
             case "Escalonamento":
                 transformCoordX.setEnabled(true);
@@ -749,6 +765,30 @@ public class FrmPainel extends javax.swing.JFrame {
                 jRadioButton2.setEnabled(false);
                 jRadioButton3.setEnabled(false);
                 angulo.setEnabled(false);
+                reflexaoX.setEnabled(false);
+                reflexaoY.setEnabled(false);
+                break;
+            case "Reflexão":
+                transformCoordX.setEnabled(false);
+                transformCoordY.setEnabled(false);
+                emRelacaoOrigem.setEnabled(false);
+                jRadioButton1.setEnabled(false);
+                jRadioButton2.setEnabled(false);
+                jRadioButton3.setEnabled(false);
+                angulo.setEnabled(false);
+                reflexaoX.setEnabled(true);
+                reflexaoY.setEnabled(true);
+                break;
+            case "Cisalhamento":
+                transformCoordX.setEnabled(true);
+                transformCoordY.setEnabled(true);
+                emRelacaoOrigem.setEnabled(false);
+                jRadioButton1.setEnabled(false);
+                jRadioButton2.setEnabled(false);
+                jRadioButton3.setEnabled(false);
+                angulo.setEnabled(false);
+                reflexaoX.setEnabled(false);
+                reflexaoY.setEnabled(false);
                 break;
             default:
                 break;
@@ -858,6 +898,8 @@ public class FrmPainel extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JComboBox<String> operacaoTransformacao;
+    private javax.swing.JCheckBox reflexaoX;
+    private javax.swing.JCheckBox reflexaoY;
     private javax.swing.JButton rmvPntPol;
     private javax.swing.JTextField transformCoordX;
     private javax.swing.JTextField transformCoordY;
