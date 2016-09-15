@@ -257,7 +257,6 @@ public class Janela extends JFrame {
                     painel.repaint();
                 }
             }
-
         }
 
         private class AplicarEscalonamento implements ButtonClick {
@@ -289,7 +288,7 @@ public class Janela extends JFrame {
                 }
             }
         }
-        
+
         private class AplicarRotacao implements ButtonClick {
 
             @Override
@@ -298,12 +297,28 @@ public class Janela extends JFrame {
                 if ((!painel.getLstDrawables().isEmpty()) && (selectedIndex >= 0)) {
                     DrawableInterface drawable = painel.getDrawable(selectedIndex);
                     drawable.rotacionar(frm.getAngulo());
-                    painel.updateDrawable(selectedIndex, drawable);
-                    painel.repaint();
+                    if (frm.getRotacionarOrigem()) {
+                        painel.updateDrawable(selectedIndex, drawable);
+                        painel.repaint();
+                    }
+                    if (frm.getRotacionarPrimPonto()) {
+                        System.out.println("primeiro ponto");
+                        painel.updateDrawable(selectedIndex, drawable);
+                        painel.repaint();
+                    }
+                    if (frm.getRotacionarCentro()) {
+                        System.out.println("centro");
+                        painel.updateDrawable(selectedIndex, drawable);
+                        painel.repaint();
+                    }
+                    //painel.updateDrawable(selectedIndex, drawable);
+                    // painel.repaint();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Selecione a posição que deseja rotacionar o objeto!");
                 }
             }
         }
-        
+
         public AplicarAlteracao() {
             super();
             buttonClicks.put(0, new AplicarTransalacao());

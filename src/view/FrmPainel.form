@@ -652,9 +652,9 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jRadioButton1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRadioButton3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRadioButton2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="rotacionarOrigem" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="rotacionarCentro" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="rotacionarPrimPonto" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
@@ -670,18 +670,18 @@
                               <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
+                          <Component id="rotacionarOrigem" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                          <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
+                          <Component id="rotacionarPrimPonto" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jRadioButton3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rotacionarCentro" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+                <Component class="javax.swing.JRadioButton" name="rotacionarOrigem">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="buttonGroup1"/>
@@ -698,10 +698,10 @@
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButton1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rotacionarOrigemActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+                <Component class="javax.swing.JRadioButton" name="rotacionarPrimPonto">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="buttonGroup1"/>
@@ -712,8 +712,11 @@
                     <Property name="text" type="java.lang.String" value="Ponto do Eixo"/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rotacionarPrimPontoActionPerformed"/>
+                  </Events>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="jRadioButton3">
+                <Component class="javax.swing.JRadioButton" name="rotacionarCentro">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="buttonGroup1"/>
@@ -725,6 +728,9 @@
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rotacionarCentroActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel13">
                   <Properties>

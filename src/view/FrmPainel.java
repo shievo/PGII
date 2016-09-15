@@ -32,27 +32,39 @@ public class FrmPainel extends javax.swing.JFrame {
     public void setActionAddPoligon(ActionListener listner) {
         addPoligon.addActionListener(listner);
     }
-    
+
     public void setActionAplicar(ActionListener listner) {
         btnAplicar.addActionListener(listner);
     }
-    
+
     public boolean getEmRelacaoOrigem() {
         return emRelacaoOrigem.isSelected();
     }
-    
+
+    public boolean getRotacionarOrigem() {
+        return rotacionarOrigem.isSelected();
+    }
+
+    public boolean getRotacionarPrimPonto() {
+        return rotacionarPrimPonto.isSelected();
+    }
+
+    public boolean getRotacionarCentro() {
+        return rotacionarCentro.isSelected();
+    }
+
     public Coordenada getTransformCoordenada() {
         try {
             float x, y;
             x = Float.parseFloat(transformCoordX.getText().toString());
             y = Float.parseFloat(transformCoordY.getText().toString());
             return new Coordenada(x, y, 1f);
-        } catch(Exception e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Valores invalidos (obs: utilize \".\" para valores com quebra decimal)");
-            return new Coordenada(1, 1, 1);   
+            return new Coordenada(1, 1, 1);
         }
     }
-    
+
     public Integer getOperacaoTransformacao() {
         return operacaoTransformacao.getSelectedIndex();
     }
@@ -60,7 +72,7 @@ public class FrmPainel extends javax.swing.JFrame {
     public Integer getAngulo() {
         return Integer.valueOf(angulo.getText().toString());
     }
-    
+
     public Pixel getPixel() {
 
         if ((xPixel.getText().equals("") || (xPixel == null))
@@ -139,9 +151,9 @@ public class FrmPainel extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         transformCoordY = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        rotacionarOrigem = new javax.swing.JRadioButton();
+        rotacionarPrimPonto = new javax.swing.JRadioButton();
+        rotacionarCentro = new javax.swing.JRadioButton();
         jLabel13 = new javax.swing.JLabel();
         angulo = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -467,29 +479,39 @@ public class FrmPainel extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rotacionar", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Origem");
-        jRadioButton1.setToolTipText("");
-        jRadioButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jRadioButton1.setEnabled(false);
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(rotacionarOrigem);
+        rotacionarOrigem.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        rotacionarOrigem.setSelected(true);
+        rotacionarOrigem.setText("Origem");
+        rotacionarOrigem.setToolTipText("");
+        rotacionarOrigem.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        rotacionarOrigem.setEnabled(false);
+        rotacionarOrigem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                rotacionarOrigemActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRadioButton2.setText("Ponto do Eixo");
-        jRadioButton2.setEnabled(false);
+        buttonGroup1.add(rotacionarPrimPonto);
+        rotacionarPrimPonto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        rotacionarPrimPonto.setText("Ponto do Eixo");
+        rotacionarPrimPonto.setEnabled(false);
+        rotacionarPrimPonto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rotacionarPrimPontoActionPerformed(evt);
+            }
+        });
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRadioButton3.setText("Centro");
-        jRadioButton3.setToolTipText("");
-        jRadioButton3.setEnabled(false);
+        buttonGroup1.add(rotacionarCentro);
+        rotacionarCentro.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        rotacionarCentro.setText("Centro");
+        rotacionarCentro.setToolTipText("");
+        rotacionarCentro.setEnabled(false);
+        rotacionarCentro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rotacionarCentroActionPerformed(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel13.setText("graus");
@@ -513,9 +535,9 @@ public class FrmPainel extends javax.swing.JFrame {
                 .addContainerGap(87, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton2))
+                    .addComponent(rotacionarOrigem)
+                    .addComponent(rotacionarCentro)
+                    .addComponent(rotacionarPrimPonto))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -527,11 +549,11 @@ public class FrmPainel extends javax.swing.JFrame {
                     .addComponent(jLabel13)
                     .addComponent(jLabel14))
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton1)
+                .addComponent(rotacionarOrigem)
                 .addGap(7, 7, 7)
-                .addComponent(jRadioButton2)
+                .addComponent(rotacionarPrimPonto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton3)
+                .addComponent(rotacionarCentro)
                 .addGap(22, 22, 22))
         );
 
@@ -702,7 +724,7 @@ public class FrmPainel extends javax.swing.JFrame {
             }
             int x = Integer.parseInt(xPoligon.getText());
             int y = Integer.parseInt(yPoligon.getText());
-            
+
             Coordenada coordenada = new Coordenada(x, y, 1);
             coordPoligono.add(coordenada);
 
@@ -737,9 +759,9 @@ public class FrmPainel extends javax.swing.JFrame {
                 transformCoordX.setEnabled(true);
                 transformCoordY.setEnabled(true);
                 emRelacaoOrigem.setEnabled(false);
-                jRadioButton1.setEnabled(false);
-                jRadioButton2.setEnabled(false);
-                jRadioButton3.setEnabled(false);
+                rotacionarOrigem.setEnabled(false);
+                rotacionarPrimPonto.setEnabled(false);
+                rotacionarCentro.setEnabled(false);
                 angulo.setEnabled(false);
                 reflexaoX.setEnabled(false);
                 reflexaoY.setEnabled(false);
@@ -750,9 +772,9 @@ public class FrmPainel extends javax.swing.JFrame {
                 transformCoordX.setEnabled(false);
                 transformCoordY.setEnabled(false);
                 emRelacaoOrigem.setEnabled(false);
-                jRadioButton1.setEnabled(true);
-                jRadioButton2.setEnabled(true);
-                jRadioButton3.setEnabled(true);
+                rotacionarOrigem.setEnabled(true);
+                rotacionarPrimPonto.setEnabled(true);
+                rotacionarCentro.setEnabled(true);
                 angulo.setEnabled(true);
                 reflexaoX.setEnabled(false);
                 reflexaoY.setEnabled(false);
@@ -761,9 +783,9 @@ public class FrmPainel extends javax.swing.JFrame {
                 transformCoordX.setEnabled(true);
                 transformCoordY.setEnabled(true);
                 emRelacaoOrigem.setEnabled(true);
-                jRadioButton1.setEnabled(false);
-                jRadioButton2.setEnabled(false);
-                jRadioButton3.setEnabled(false);
+                rotacionarOrigem.setEnabled(false);
+                rotacionarPrimPonto.setEnabled(false);
+                rotacionarCentro.setEnabled(false);
                 angulo.setEnabled(false);
                 reflexaoX.setEnabled(false);
                 reflexaoY.setEnabled(false);
@@ -772,9 +794,9 @@ public class FrmPainel extends javax.swing.JFrame {
                 transformCoordX.setEnabled(false);
                 transformCoordY.setEnabled(false);
                 emRelacaoOrigem.setEnabled(false);
-                jRadioButton1.setEnabled(false);
-                jRadioButton2.setEnabled(false);
-                jRadioButton3.setEnabled(false);
+                rotacionarOrigem.setEnabled(false);
+                rotacionarPrimPonto.setEnabled(false);
+                rotacionarCentro.setEnabled(false);
                 angulo.setEnabled(false);
                 reflexaoX.setEnabled(true);
                 reflexaoY.setEnabled(true);
@@ -783,9 +805,9 @@ public class FrmPainel extends javax.swing.JFrame {
                 transformCoordX.setEnabled(true);
                 transformCoordY.setEnabled(true);
                 emRelacaoOrigem.setEnabled(false);
-                jRadioButton1.setEnabled(false);
-                jRadioButton2.setEnabled(false);
-                jRadioButton3.setEnabled(false);
+                rotacionarOrigem.setEnabled(false);
+                rotacionarPrimPonto.setEnabled(false);
+                rotacionarCentro.setEnabled(false);
                 angulo.setEnabled(false);
                 reflexaoX.setEnabled(false);
                 reflexaoY.setEnabled(false);
@@ -804,9 +826,17 @@ public class FrmPainel extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_transformCoordXActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    private void rotacionarOrigemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotacionarOrigemActionPerformed
+
+    }//GEN-LAST:event_rotacionarOrigemActionPerformed
+
+    private void rotacionarPrimPontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotacionarPrimPontoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rotacionarPrimPontoActionPerformed
+
+    private void rotacionarCentroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotacionarCentroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rotacionarCentroActionPerformed
 
     public Poligon getPoligon() {
         Poligon poligon = new Poligon(coordPoligono, edtNome.getText());
@@ -892,15 +922,15 @@ public class FrmPainel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JComboBox<String> operacaoTransformacao;
     private javax.swing.JCheckBox reflexaoX;
     private javax.swing.JCheckBox reflexaoY;
     private javax.swing.JButton rmvPntPol;
+    private javax.swing.JRadioButton rotacionarCentro;
+    private javax.swing.JRadioButton rotacionarOrigem;
+    private javax.swing.JRadioButton rotacionarPrimPonto;
     private javax.swing.JTextField transformCoordX;
     private javax.swing.JTextField transformCoordY;
     private javax.swing.JTextField xDirLinha;
