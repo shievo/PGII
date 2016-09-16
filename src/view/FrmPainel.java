@@ -36,9 +36,15 @@ public class FrmPainel extends javax.swing.JFrame {
     public void setActionAplicar(ActionListener listner) {
         btnAplicar.addActionListener(listner);
     }
-
-    public boolean getEmRelacaoOrigem() {
-        return emRelacaoOrigem.isSelected();
+    
+    public int getEmRelacao() {
+        if (rotacionarOrigem.isSelected())
+            return 0;
+        if (rotacionarPrimPonto.isSelected())
+            return 1;
+        if (rotacionarCentro.isSelected())
+            return 2;
+        return 0;
     }
 
     public boolean getRotacionarOrigem() {
@@ -114,6 +120,7 @@ public class FrmPainel extends javax.swing.JFrame {
 
         jFrame1 = new javax.swing.JFrame();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         addPixel = new javax.swing.JButton();
@@ -145,7 +152,7 @@ public class FrmPainel extends javax.swing.JFrame {
         addPonPol = new javax.swing.JButton();
         rmvPntPol = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        operacaoTransformacao = new javax.swing.JComboBox<>();
+        operacaoTransformacao = new javax.swing.JComboBox<String>();
         jLabel11 = new javax.swing.JLabel();
         transformCoordX = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
@@ -157,10 +164,7 @@ public class FrmPainel extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         angulo = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        emRelacaoOrigem = new javax.swing.JCheckBox();
         btnAplicar = new javax.swing.JButton();
-        reflexaoX = new javax.swing.JCheckBox();
-        reflexaoY = new javax.swing.JCheckBox();
         jLabel10 = new javax.swing.JLabel();
         edtNome = new javax.swing.JTextField();
 
@@ -458,7 +462,7 @@ public class FrmPainel extends javax.swing.JFrame {
         jPanel4.getAccessibleContext().setAccessibleName("");
         jPanel4.getAccessibleContext().setAccessibleDescription("");
 
-        operacaoTransformacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Translação", "Rotação", "Escalonamento", "Reflexão", "Cisalhamento" }));
+        operacaoTransformacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Translação", "Rotação", "Escalonamento", "Reflexão", "Cisalhamento" }));
         operacaoTransformacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 operacaoTransformacaoActionPerformed(evt);
@@ -494,7 +498,7 @@ public class FrmPainel extends javax.swing.JFrame {
 
         buttonGroup1.add(rotacionarPrimPonto);
         rotacionarPrimPonto.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        rotacionarPrimPonto.setText("Ponto do Eixo");
+        rotacionarPrimPonto.setText("Primeiro ponto");
         rotacionarPrimPonto.setEnabled(false);
         rotacionarPrimPonto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -504,7 +508,7 @@ public class FrmPainel extends javax.swing.JFrame {
 
         buttonGroup1.add(rotacionarCentro);
         rotacionarCentro.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        rotacionarCentro.setText("Centro");
+        rotacionarCentro.setText("Sobre o centro");
         rotacionarCentro.setToolTipText("");
         rotacionarCentro.setEnabled(false);
         rotacionarCentro.addActionListener(new java.awt.event.ActionListener() {
@@ -557,21 +561,9 @@ public class FrmPainel extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        emRelacaoOrigem.setText("Em relação a Origem");
-        emRelacaoOrigem.setEnabled(false);
-        emRelacaoOrigem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emRelacaoOrigemActionPerformed(evt);
-            }
-        });
-
         btnAplicar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAplicar.setText("Aplicar ");
         btnAplicar.setToolTipText("");
-
-        reflexaoX.setText("Em torno do eixo x");
-
-        reflexaoY.setText("Em torno do eixo Y");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -583,10 +575,7 @@ public class FrmPainel extends javax.swing.JFrame {
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(reflexaoY)
-                            .addComponent(reflexaoX)
                             .addComponent(operacaoTransformacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(emRelacaoOrigem)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -604,7 +593,7 @@ public class FrmPainel extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(operacaoTransformacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
+                .addGap(51, 51, 51)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(transformCoordX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -612,13 +601,7 @@ public class FrmPainel extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(transformCoordY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(emRelacaoOrigem)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(reflexaoX)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(reflexaoY)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAplicar)
@@ -758,69 +741,50 @@ public class FrmPainel extends javax.swing.JFrame {
             case "Translação":
                 transformCoordX.setEnabled(true);
                 transformCoordY.setEnabled(true);
-                emRelacaoOrigem.setEnabled(false);
                 rotacionarOrigem.setEnabled(false);
                 rotacionarPrimPonto.setEnabled(false);
                 rotacionarCentro.setEnabled(false);
                 angulo.setEnabled(false);
-                reflexaoX.setEnabled(false);
-                reflexaoY.setEnabled(false);
 
                 break;
             case "Rotação":
 
                 transformCoordX.setEnabled(false);
                 transformCoordY.setEnabled(false);
-                emRelacaoOrigem.setEnabled(false);
                 rotacionarOrigem.setEnabled(true);
                 rotacionarPrimPonto.setEnabled(true);
                 rotacionarCentro.setEnabled(true);
                 angulo.setEnabled(true);
-                reflexaoX.setEnabled(false);
-                reflexaoY.setEnabled(false);
                 break;
             case "Escalonamento":
                 transformCoordX.setEnabled(true);
                 transformCoordY.setEnabled(true);
-                emRelacaoOrigem.setEnabled(true);
-                rotacionarOrigem.setEnabled(false);
-                rotacionarPrimPonto.setEnabled(false);
-                rotacionarCentro.setEnabled(false);
+                rotacionarOrigem.setEnabled(true);
+                rotacionarPrimPonto.setEnabled(true);
+                rotacionarCentro.setEnabled(true);
                 angulo.setEnabled(false);
-                reflexaoX.setEnabled(false);
-                reflexaoY.setEnabled(false);
                 break;
             case "Reflexão":
                 transformCoordX.setEnabled(false);
                 transformCoordY.setEnabled(false);
-                emRelacaoOrigem.setEnabled(false);
                 rotacionarOrigem.setEnabled(false);
                 rotacionarPrimPonto.setEnabled(false);
                 rotacionarCentro.setEnabled(false);
                 angulo.setEnabled(false);
-                reflexaoX.setEnabled(true);
-                reflexaoY.setEnabled(true);
                 break;
             case "Cisalhamento":
                 transformCoordX.setEnabled(true);
                 transformCoordY.setEnabled(true);
-                emRelacaoOrigem.setEnabled(false);
                 rotacionarOrigem.setEnabled(false);
                 rotacionarPrimPonto.setEnabled(false);
                 rotacionarCentro.setEnabled(false);
                 angulo.setEnabled(false);
-                reflexaoX.setEnabled(false);
-                reflexaoY.setEnabled(false);
                 break;
             default:
                 break;
         }
 
     }//GEN-LAST:event_operacaoTransformacaoActionPerformed
-
-    private void emRelacaoOrigemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emRelacaoOrigemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_emRelacaoOrigemActionPerformed
 
     private void transformCoordXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transformCoordXActionPerformed
         // TODO add your handling code here:
@@ -898,10 +862,10 @@ public class FrmPainel extends javax.swing.JFrame {
     private javax.swing.JTextField angulo;
     private javax.swing.JButton btnAplicar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton cancelLinha;
     private javax.swing.JButton cancelPixel;
     private javax.swing.JTextField edtNome;
-    private javax.swing.JCheckBox emRelacaoOrigem;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -925,8 +889,6 @@ public class FrmPainel extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JComboBox<String> operacaoTransformacao;
-    private javax.swing.JCheckBox reflexaoX;
-    private javax.swing.JCheckBox reflexaoY;
     private javax.swing.JButton rmvPntPol;
     private javax.swing.JRadioButton rotacionarCentro;
     private javax.swing.JRadioButton rotacionarOrigem;

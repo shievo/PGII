@@ -267,7 +267,7 @@ public class Janela extends JFrame {
                 if ((!painel.getLstDrawables().isEmpty()) && (selectedIndex >= 0)) {
                     DrawableInterface drawable = painel.getDrawable(selectedIndex);
                     Coordenada incPoint = frm.getTransformCoordenada();
-                    drawable.escalonar(incPoint, frm.getEmRelacaoOrigem());
+                    drawable.escalonar(incPoint, frm.getEmRelacao());
                     painel.updateDrawable(selectedIndex, drawable);
                     painel.repaint();
                 }
@@ -296,7 +296,7 @@ public class Janela extends JFrame {
                 int selectedIndex = lvDrawable.getSelectedIndex();
                 if ((!painel.getLstDrawables().isEmpty()) && (selectedIndex >= 0)) {
                     DrawableInterface drawable = painel.getDrawable(selectedIndex);
-                    drawable.rotacionar(frm.getAngulo());
+                    drawable.rotacionar(frm.getAngulo(), frm.getEmRelacao());
                     if (frm.getRotacionarOrigem()) {
                         painel.updateDrawable(selectedIndex, drawable);
                         painel.repaint();

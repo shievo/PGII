@@ -104,6 +104,14 @@ public class Calcular {
         matrizEscalonamento.add(new Coordenada(0, 0, coordenada.getZasFloat()));
         return matrizEscalonamento;
     }
+    
+    public static List<Coordenada> getMatrizNatural(Coordenada coordenada) {
+        List<Coordenada> matrizEscalonamento = new ArrayList<>();
+        matrizEscalonamento.add(new Coordenada(1, 0, 0));
+        matrizEscalonamento.add(new Coordenada(0, 1, 0));
+        matrizEscalonamento.add(new Coordenada(coordenada.getXasFloat(), coordenada.getYasFloat(), coordenada.getZasFloat()));
+        return matrizEscalonamento;
+    }
 
     public static List<Coordenada> getMatrizReflexao(Coordenada coordenada) {
         List<Coordenada> matrizReflexao = new ArrayList<>();
@@ -123,4 +131,20 @@ public class Calcular {
         matrizRotacao.add(new Coordenada(0, 0, 1));
         return matrizRotacao;
     }
+    
+    public static Coordenada divisaoSimples(Coordenada divisor, Coordenada dividendo) {
+        float x, y, z;
+        x = dividendo.getXasFloat() / divisor.getXasFloat();
+        y = dividendo.getYasFloat() / divisor.getYasFloat();
+        z = dividendo.getZasFloat() / divisor.getZasFloat();
+        return new Coordenada(x, y, z);
+    }
+    
+    public static Coordenada sumCoordenada(List<Coordenada> lstCoordenada) {
+        Coordenada sumResult = new Coordenada();
+        for (Coordenada coordenada : lstCoordenada) 
+            sumResult = sumResult.add(coordenada);
+        return sumResult;
+    }
+        
 }

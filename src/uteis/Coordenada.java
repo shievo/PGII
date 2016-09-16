@@ -72,7 +72,7 @@ public class Coordenada {
 
     @Override
     public String toString() {
-        return "x=" + x + ", y=" + y;//por hora nao sera impresso z
+        return "x=" + x + ", y=" + y + ", z=" + z;//por hora nao sera impresso z
     }
 
     public Coordenada add(Coordenada other) {

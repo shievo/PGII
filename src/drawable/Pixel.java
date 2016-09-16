@@ -41,7 +41,7 @@ public class Pixel extends DrawableObject implements DrawableInterface {
     }
     
     @Override
-    public void escalonar(Coordenada fator, boolean emRelacaoOrigem) {
+    public void escalonar(Coordenada fator, int emRelacao) {
         //nao faz nada , nao ha como aumentar um pixel
     }
 
@@ -52,10 +52,14 @@ public class Pixel extends DrawableObject implements DrawableInterface {
     }
 
     @Override
-    public void rotacionar(double angulo) {
+    public void rotacionar(double angulo, int emRelacao) {
         List<Coordenada> matrizRotacao = Calcular.getMatrizRotacao(angulo);
         this.coordenada = Calcular.multiplicarMatrizCoordenadaAsFloat(this.coordenada, matrizRotacao);
     }
-    
 
+    @Override
+    public Coordenada getCenter() {
+        return this.coordenada;
+    }
+    
 }

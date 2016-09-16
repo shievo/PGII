@@ -12,10 +12,12 @@ public interface DrawableInterface {
     
     public void translation(Coordenada incPoint);
     
-    public void escalonar(Coordenada fator, boolean emRelacaoOrigem);
+    public void escalonar(Coordenada fator, int emRelacao);
     
     public void refletir(Coordenada reflexao);
     
-    public void rotacionar(double angulo);
+    public void rotacionar(double angulo, int emRelacao);
+    
+    public Coordenada getCenter();
     
 }

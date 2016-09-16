@@ -56,6 +56,7 @@ public class Painel extends JPanel {
     }
     
     public void updateDrawable(int index, DrawableInterface drawable) {
+        System.out.println("drawable -> " + drawable.toString());
         lstDrawables.set(index, drawable);
     }
 
