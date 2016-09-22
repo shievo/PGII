@@ -152,7 +152,7 @@ public class FrmPainel extends javax.swing.JFrame {
         addPonPol = new javax.swing.JButton();
         rmvPntPol = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        operacaoTransformacao = new javax.swing.JComboBox<String>();
+        operacaoTransformacao = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         transformCoordX = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
@@ -165,6 +165,9 @@ public class FrmPainel extends javax.swing.JFrame {
         angulo = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         btnAplicar = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        refleteX = new javax.swing.JCheckBox();
+        refleteY = new javax.swing.JCheckBox();
         jLabel10 = new javax.swing.JLabel();
         edtNome = new javax.swing.JTextField();
 
@@ -462,7 +465,7 @@ public class FrmPainel extends javax.swing.JFrame {
         jPanel4.getAccessibleContext().setAccessibleName("");
         jPanel4.getAccessibleContext().setAccessibleDescription("");
 
-        operacaoTransformacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Translação", "Rotação", "Escalonamento", "Reflexão", "Cisalhamento" }));
+        operacaoTransformacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Translação", "Rotação", "Escalonamento", "Reflexão", "Cisalhamento" }));
         operacaoTransformacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 operacaoTransformacaoActionPerformed(evt);
@@ -565,6 +568,40 @@ public class FrmPainel extends javax.swing.JFrame {
         btnAplicar.setText("Aplicar ");
         btnAplicar.setToolTipText("");
 
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Refletir", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+
+        refleteX.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        refleteX.setText("Sobre o eixo X");
+        refleteX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refleteXActionPerformed(evt);
+            }
+        });
+
+        refleteY.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        refleteY.setText("Sobre o eixo Y");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(refleteY)
+                    .addComponent(refleteX))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(refleteX)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(refleteY)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -572,19 +609,20 @@ public class FrmPainel extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(operacaoTransformacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(transformCoordY, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnAplicar)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(transformCoordX, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnAplicar))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(transformCoordY, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -593,7 +631,7 @@ public class FrmPainel extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(operacaoTransformacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
+                .addGap(34, 34, 34)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(transformCoordX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -601,7 +639,9 @@ public class FrmPainel extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(transformCoordY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                .addGap(34, 34, 34)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAplicar)
@@ -802,6 +842,10 @@ public class FrmPainel extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rotacionarCentroActionPerformed
 
+    private void refleteXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refleteXActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_refleteXActionPerformed
+
     public Poligon getPoligon() {
         Poligon poligon = new Poligon(coordPoligono, edtNome.getText());
         coordPoligono = new ArrayList<>();
@@ -886,9 +930,12 @@ public class FrmPainel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JComboBox<String> operacaoTransformacao;
+    private javax.swing.JCheckBox refleteX;
+    private javax.swing.JCheckBox refleteY;
     private javax.swing.JButton rmvPntPol;
     private javax.swing.JRadioButton rotacionarCentro;
     private javax.swing.JRadioButton rotacionarOrigem;

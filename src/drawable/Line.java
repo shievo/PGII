@@ -95,14 +95,6 @@ public class Line extends DrawableObject implements DrawableInterface {
         this.end = Calcular.multiplicarMatrizCoordenadaAsFloat(end, matrizEscalonamento);
     }
     
-
-    @Override
-    public void refletir(Coordenada reflexao) {
-        List<Coordenada> matrizReflexao = Calcular.getMatrizReflexao(reflexao);
-        this.start = Calcular.multiplicarMatrizCoordenada(this.start, matrizReflexao);
-        this.end = Calcular.multiplicarMatrizCoordenada(this.end, matrizReflexao);
-    }
-
     @Override
     public void rotacionar(double angulo, int emRelacao) {
         switch (emRelacao) {
@@ -163,5 +155,12 @@ public class Line extends DrawableObject implements DrawableInterface {
         Coordenada divisor = new Coordenada(2, 2, 2);
         centro = Calcular.divisaoSimples(divisor, centro);
         return centro;
+    }
+    
+    @Override
+    public void refletir(Coordenada reflexao) {
+        List<Coordenada> matrizReflexao = Calcular.getMatrizReflexao(reflexao);
+        this.start = Calcular.multiplicarMatrizCoordenada(this.start, matrizReflexao);
+        this.end = Calcular.multiplicarMatrizCoordenada(this.end, matrizReflexao);
     }
 }

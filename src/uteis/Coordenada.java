@@ -20,7 +20,7 @@ public class Coordenada {
         this.x = x;
         this.y = y;
         this.z = z;
-    }
+    } 
 
     public int getX() {
         return Math.round(x);
